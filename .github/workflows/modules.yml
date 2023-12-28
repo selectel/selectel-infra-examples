@@ -1,0 +1,48 @@
+name: 'Test Selectel Terraform modules'
+
+on:
+  schedule:
+    - cron: '0 7 * * *' # run every day at 10:00 MSK
+  workflow_dispatch:
+        
+jobs:
+  setup:
+    name: 'Test Selectel Terraform modules'
+    runs-on: self-hosted
+    env:
+      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
+      TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
+      TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v3
+
+    - name: Setup NodeJS v20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3.0.0
+
+#    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
+#      uses: bridgecrewio/checkov-action@v12
+#      with:
+#        quiet: true
+#        directory: .
+#        output_format: cli
+#        framework: terraform,github_actions
+#        container_user: 1000
+
+    - name: Lint Terraform
+      run: terraform fmt -diff -check -recursive
+
+    - name: Init Terraform
+      run: terraform init
+
+    - name: Terraform apply
+      run: terraform apply -auto-approve
+
+    - name: Terraform destroy
+      run: terraform destroy -auto-approve
