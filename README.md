@@ -1,5 +1,6 @@
 # Selectel infra terraform modules example
 
+[![Пайплайн проверки работосопособности модулей](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml)
 
 > Для работы с облачными ресурсами в Selectel через `terraform` будет не лишним ознакомиться с документацией по работе с `terraform providers openstack/selectel` на [офф. странице.](https://docs.selectel.ru/terraform/)
 
