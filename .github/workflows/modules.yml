@@ -56,7 +56,7 @@ jobs:
         message: |
           GitHub Terraform moudules pipeline was failed!
           
-          Action: ${{ github.action }}
+          Action: ${{ github.action.path }}
           
           Repository: ${{ github.repository }}
           
