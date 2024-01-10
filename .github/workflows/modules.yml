@@ -54,9 +54,9 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          Terraform modules build pipeline was failed
+          GitHub Terraform moudules pipeline was failed!
           
-          Action: ${{ github.action_path }}
+          Action: ${{ github.action }}
           
           Repository: ${{ github.repository }}
           
