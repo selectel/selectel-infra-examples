@@ -26,14 +26,14 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3.0.0
 
-    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
-      uses: bridgecrewio/checkov-action@v12
-      with:
-        quiet: true
-        directory: .
-        output_format: cli
-        framework: terraform,github_actions
-        container_user: 1000
+#    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
+#      uses: bridgecrewio/checkov-action@v12
+#      with:
+#        quiet: true
+#        directory: .
+#        output_format: cli
+#        framework: terraform,github_actions
+#        container_user: 1000
 
     - name: Lint Terraform
       run: terraform fmt -diff -check -recursive
@@ -54,10 +54,8 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          GitHub Terraform moudules pipeline was failed!
+          GitHub "Terraform modules" pipeline was failed!
           
           Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          
-          Repository: ${{ github.repository }}
           
           See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
