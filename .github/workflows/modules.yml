@@ -39,7 +39,7 @@ jobs:
       run: terraform fmt -diff -check -recursive
 
     - name: Init Terraform
-      run: terraformTESTFAILJOB init
+      run: terraform init
 
     - name: Terraform apply
       run: terraform apply -auto-approve
@@ -47,21 +47,17 @@ jobs:
     - name: Terraform destroy
       run: terraform destroy -auto-approve
 
-  notify:
-    name: 'Telegram notify'
-    runs-on: self-hosted
-    if: ${{ failure() }}
-    steps:
-      - name: send telegram message on failure
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            Terraform modules build pipeline was failed
-            
-            Action: $GITHUB_ACTION_PATH
-            
-            Repository: ${{ github.repository }}
-            
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+    - name: Telegram notify if job was failed
+      if: ${{ failure() }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          Terraform modules build pipeline was failed
+          
+          Action: $GITHUB_ACTION_PATH
+          
+          Repository: ${{ github.repository }}
+          
+          See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
