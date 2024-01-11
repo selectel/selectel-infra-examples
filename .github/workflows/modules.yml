@@ -1,9 +1,9 @@
 name: 'Test Selectel Terraform modules'
 
-on:
-  schedule:
-    - cron: '0 7 * * *' # run every day at 10:00 MSK
-  workflow_dispatch:
+on: [push]
+#  schedule:
+#    - cron: '0 7 * * *' # run every day at 10:00 MSK
+#  workflow_dispatch:
         
 jobs:
   setup:
@@ -26,14 +26,14 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3.0.0
 
-#    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
-#      uses: bridgecrewio/checkov-action@v12
-#      with:
-#        quiet: true
-#        directory: .
-#        output_format: cli
-#        framework: terraform,github_actions
-#        container_user: 1000
+    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
+      uses: bridgecrewio/checkov-action@v12
+      with:
+        quiet: true
+        directory: .
+        output_format: cli
+        framework: terraform,github_actions
+        container_user: 1000
 
     - name: Lint Terraform
       run: terraform fmt -diff -check -recursive
@@ -54,8 +54,10 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          GitHub "Terraform modules" pipeline was failed!
-          
-          Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          
-          See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+          -= GITHUB public repository selectel/selectel-infra-examples =-
+          Terraform modules build pipeline was failed
+          🚨 Critical
+          Не катится пайпа, необходимо принять меры, возможно внутренние пайпы с terraform так же не будут катиться.
+
+          ⚡️Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          🔥 See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
