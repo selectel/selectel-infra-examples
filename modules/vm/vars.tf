@@ -70,16 +70,28 @@ variable "subnet_cidr" {
   default     = "192.168.0.0/24"
 }
 
-variable "router_name" {
+variable "router1_name" {
   description = "Router name to be created"
   type        = string
   default     = "router_1"
 }
 
-variable "network_name" {
+variable "network1_name" {
   description = "Network name to be created"
   type        = string
   default     = "network_1"
+}
+
+variable "router2_name" {
+  description = "Router name to be created"
+  type        = string
+  default     = "router_2"
+}
+
+variable "network2_name" {
+  description = "Network name to be created"
+  type        = string
+  default     = "network_2"
 }
 
 variable "enable_dhcp" {

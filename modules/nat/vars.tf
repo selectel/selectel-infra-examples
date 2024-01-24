@@ -36,3 +36,8 @@ variable "enable_dhcp" {
   type        = bool
   default     = false
 }
+
+variable "no_gateway" {
+  default     = true
+  description = "(Optional) Do not set a gateway IP on this subnet. Changing this removes or adds a default gateway IP of the existing subnet."
+}

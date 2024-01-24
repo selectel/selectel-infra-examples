@@ -18,23 +18,43 @@ module "volume" {
   image_name          = var.image_name[count.index]
 }
 
-module "nat" {
+module "nat1" {
   source = "../nat"
 
   router_external_net_name = var.router_external_net_name
   dns_nameservers          = var.dns_nameservers
   subnet_cidr              = var.subnet_cidr
-  router_name              = var.router_name
-  network_name             = var.network_name
+  router_name              = var.router1_name
+  network_name             = var.network1_name
+  enable_dhcp              = var.enable_dhcp
+}
+
+module "nat2" {
+  source = "../nat"
+
+  router_external_net_name = var.router_external_net_name
+  dns_nameservers          = var.dns_nameservers
+  subnet_cidr              = var.subnet_cidr
+  router_name              = var.router2_name
+  network_name             = var.network2_name
   enable_dhcp              = var.enable_dhcp
 }
 
 resource "openstack_networking_port_v2" "port_1" {
   name       = "${var.vm_name}-eth0"
-  network_id = module.nat.network_id
+  network_id = module.nat1.network_id
 
   fixed_ip {
-    subnet_id = module.nat.subnet_id
+    subnet_id = module.nat1.subnet_id
+  }
+}
+
+resource "openstack_networking_port_v2" "port_2" {
+  name       = "${var.vm_name}-eth1"
+  network_id = module.nat2.network_id
+
+  fixed_ip {
+    subnet_id = module.nat2.subnet_id
   }
 }
 
@@ -46,6 +66,10 @@ resource "openstack_compute_instance_v2" "instance_1" {
 
   network {
     port = openstack_networking_port_v2.port_1.id
+  }
+
+  network {
+    port = openstack_networking_port_v2.port_2.id
   }
 
   dynamic "block_device" {
