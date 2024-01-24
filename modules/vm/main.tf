@@ -18,43 +18,58 @@ module "volume" {
   image_name          = var.image_name[count.index]
 }
 
-module "nat1" {
+module "nat" {
   source = "../nat"
 
   router_external_net_name = var.router_external_net_name
   dns_nameservers          = var.dns_nameservers
   subnet_cidr              = var.subnet_cidr
-  router_name              = var.router1_name
-  network_name             = var.network1_name
+  router_name              = var.router_name
+  network_name             = var.network_name
   enable_dhcp              = var.enable_dhcp
+  no_gateway               = var.no_gateway
 }
 
-module "nat2" {
-  source = "../nat"
+module "network_1" {
+  source = "../network"
 
-  router_external_net_name = var.router_external_net_name
   dns_nameservers          = var.dns_nameservers
-  subnet_cidr              = var.subnet_cidr
-  router_name              = var.router2_name
-  network_name             = var.network2_name
-  enable_dhcp              = var.enable_dhcp
+  subnet_cidr              = var.local_network_1_subnet_cidr
+  network_name             = var.local_network_1_name
+}
+
+module "network_2" {
+  source = "../network"
+
+  dns_nameservers          = var.dns_nameservers
+  subnet_cidr              = var.local_network_2_subnet_cidr
+  network_name             = var.local_network_2_name
 }
 
 resource "openstack_networking_port_v2" "port_1" {
   name       = "${var.vm_name}-eth0"
-  network_id = module.nat1.network_id
+  network_id = module.nat.network_id
 
   fixed_ip {
-    subnet_id = module.nat1.subnet_id
+    subnet_id = module.nat.subnet_id
   }
 }
 
 resource "openstack_networking_port_v2" "port_2" {
   name       = "${var.vm_name}-eth1"
-  network_id = module.nat2.network_id
+  network_id = module.network_1.network_id
 
   fixed_ip {
-    subnet_id = module.nat2.subnet_id
+    subnet_id = module.network_1.subnet_id
+  }
+}
+
+resource "openstack_networking_port_v2" "port_3" {
+  name       = "${var.vm_name}-eth2"
+  network_id = module.network_2.network_id
+
+  fixed_ip {
+    subnet_id = module.network_2.subnet_id
   }
 }
 
@@ -69,7 +84,7 @@ resource "openstack_compute_instance_v2" "instance_1" {
   }
 
   network {
-    port = openstack_networking_port_v2.port_2.id
+    port = openstack_networking_port_v2.port_1.id
   }
 
   dynamic "block_device" {
@@ -91,4 +106,9 @@ resource "openstack_compute_instance_v2" "instance_1" {
       key_pair,
     ]
   }
+}
+
+resource "openstack_compute_interface_attach_v2" "port_3_attach" {
+  instance_id = openstack_compute_instance_v2.instance_1.id
+  port_id = openstack_networking_port_v2.port_3.id
 }

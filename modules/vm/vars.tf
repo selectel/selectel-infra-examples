@@ -65,37 +65,54 @@ variable "dns_nameservers" {
 }
 
 variable "subnet_cidr" {
-  description = "Subnet CIRD to be created"
+  description = "Subnet CIDR to be created"
   type        = string
   default     = "192.168.0.0/24"
 }
 
-variable "router1_name" {
+variable "router_name" {
   description = "Router name to be created"
   type        = string
   default     = "router_1"
 }
 
-variable "network1_name" {
+variable "network_name" {
   description = "Network name to be created"
   type        = string
   default     = "network_1"
 }
 
-variable "router2_name" {
-  description = "Router name to be created"
+variable "local_network_1_name" {
+  description = "Local network name to be created"
   type        = string
-  default     = "router_2"
+  default     = "local_network_1"
 }
 
-variable "network2_name" {
-  description = "Network name to be created"
+variable "local_network_2_name" {
+  description = "Local network name to be created"
   type        = string
-  default     = "network_2"
+  default     = "local_network_2"
+}
+
+variable "local_network_1_subnet_cidr" {
+  description = "Subnet CIDR to be created"
+  type        = string
+  default     = "192.168.1.0/24"
+}
+
+variable "local_network_2_subnet_cidr" {
+  description = "Subnet CIDR to be created"
+  type        = string
+  default     = "192.168.2.0/24"
 }
 
 variable "enable_dhcp" {
   description = "DHCP enable flag"
   type        = bool
   default     = false
+}
+
+variable "no_gateway" {
+  type    = string
+  default = false
 }

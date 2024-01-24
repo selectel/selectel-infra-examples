@@ -18,6 +18,7 @@ resource "openstack_networking_subnet_v2" "subnet_1" {
   cidr            = var.subnet_cidr
   name            = var.subnet_cidr
   enable_dhcp     = var.enable_dhcp
+  no_gateway      = var.no_gateway
 }
 
 resource "openstack_networking_router_interface_v2" "router_interface_1" {
