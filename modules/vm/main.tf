@@ -33,7 +33,6 @@ module "nat" {
 module "network_1" {
   source = "../network"
 
-  dns_nameservers          = var.dns_nameservers
   subnet_cidr              = var.local_network_1_subnet_cidr
   network_name             = var.local_network_1_name
 }
@@ -41,7 +40,6 @@ module "network_1" {
 module "network_2" {
   source = "../network"
 
-  dns_nameservers          = var.dns_nameservers
   subnet_cidr              = var.local_network_2_subnet_cidr
   network_name             = var.local_network_2_name
 }
@@ -84,7 +82,7 @@ resource "openstack_compute_instance_v2" "instance_1" {
   }
 
   network {
-    port = openstack_networking_port_v2.port_1.id
+    port = openstack_networking_port_v2.port_2.id
   }
 
   dynamic "block_device" {

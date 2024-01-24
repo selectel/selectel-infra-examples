@@ -2,6 +2,7 @@ module "nat" {
   source      = "../../nat"
   subnet_cidr = var.nat_subnet_cidr
   router_name = "${var.cluster_name}-router"
+  no_gateway  = var.no_gateway
 }
 
 module "kubernetes_cluster" {

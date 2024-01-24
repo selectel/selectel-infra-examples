@@ -160,3 +160,8 @@ variable "gpu_ng_taints" {
   }))
   default = []
 }
+
+variable "no_gateway" {
+  type    = string
+  default = false
+}
