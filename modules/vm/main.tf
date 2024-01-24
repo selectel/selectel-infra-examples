@@ -33,15 +33,15 @@ module "nat" {
 module "network_1" {
   source = "../network"
 
-  subnet_cidr              = var.local_network_1_subnet_cidr
-  network_name             = var.local_network_1_name
+  subnet_cidr  = var.local_network_1_subnet_cidr
+  network_name = var.local_network_1_name
 }
 
 module "network_2" {
   source = "../network"
 
-  subnet_cidr              = var.local_network_2_subnet_cidr
-  network_name             = var.local_network_2_name
+  subnet_cidr  = var.local_network_2_subnet_cidr
+  network_name = var.local_network_2_name
 }
 
 resource "openstack_networking_port_v2" "port_1" {
@@ -108,5 +108,5 @@ resource "openstack_compute_instance_v2" "instance_1" {
 
 resource "openstack_compute_interface_attach_v2" "port_3_attach" {
   instance_id = openstack_compute_instance_v2.instance_1.id
-  port_id = openstack_networking_port_v2.port_3.id
+  port_id     = openstack_networking_port_v2.port_3.id
 }
