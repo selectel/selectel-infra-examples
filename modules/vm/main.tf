@@ -27,6 +27,21 @@ module "nat" {
   router_name              = var.router_name
   network_name             = var.network_name
   enable_dhcp              = var.enable_dhcp
+  no_gateway               = var.no_gateway
+}
+
+module "network_1" {
+  source = "../network"
+
+  subnet_cidr  = var.local_network_1_subnet_cidr
+  network_name = var.local_network_1_name
+}
+
+module "network_2" {
+  source = "../network"
+
+  subnet_cidr  = var.local_network_2_subnet_cidr
+  network_name = var.local_network_2_name
 }
 
 resource "openstack_networking_port_v2" "port_1" {
@@ -38,6 +53,24 @@ resource "openstack_networking_port_v2" "port_1" {
   }
 }
 
+resource "openstack_networking_port_v2" "port_2" {
+  name       = "${var.vm_name}-eth1"
+  network_id = module.network_1.network_id
+
+  fixed_ip {
+    subnet_id = module.network_1.subnet_id
+  }
+}
+
+resource "openstack_networking_port_v2" "port_3" {
+  name       = "${var.vm_name}-eth2"
+  network_id = module.network_2.network_id
+
+  fixed_ip {
+    subnet_id = module.network_2.subnet_id
+  }
+}
+
 resource "openstack_compute_instance_v2" "instance_1" {
   name = var.vm_name
 
@@ -46,6 +79,10 @@ resource "openstack_compute_instance_v2" "instance_1" {
 
   network {
     port = openstack_networking_port_v2.port_1.id
+  }
+
+  network {
+    port = openstack_networking_port_v2.port_2.id
   }
 
   dynamic "block_device" {
@@ -67,4 +104,9 @@ resource "openstack_compute_instance_v2" "instance_1" {
       key_pair,
     ]
   }
+}
+
+resource "openstack_compute_interface_attach_v2" "port_3_attach" {
+  instance_id = openstack_compute_instance_v2.instance_1.id
+  port_id     = openstack_networking_port_v2.port_3.id
 }
