@@ -17,7 +17,8 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_nat"></a> [nat](#module\_nat) | ../nat | n/a |
-| <a name="module_network"></a> [network](#module\_network) | ../network | n/a |
+| <a name="module_network_1"></a> [network\_1](#module\_network\_1) | ../network | n/a |
+| <a name="module_network_2"></a> [network\_2](#module\_network\_2) | ../network | n/a |
 | <a name="module_os-flavor"></a> [os-flavor](#module\_os-flavor) | ../flavor | n/a |
 | <a name="module_volume"></a> [volume](#module\_volume) | ../volume | n/a |
 
@@ -43,14 +44,14 @@
 | <a name="input_local_network_2_name"></a> [local\_network\_2\_name](#input\_local\_network\_2\_name) | Local network name to be created | `string` | `"local_network_2"` | no |
 | <a name="input_local_network_2_subnet_cidr"></a> [local\_network\_2\_subnet\_cidr](#input\_local\_network\_2\_subnet\_cidr) | Subnet CIDR to be created | `string` | `"192.168.2.0/24"` | no |
 | <a name="input_network_name"></a> [network\_name](#input\_network\_name) | Network name to be created | `string` | `"network_1"` | no |
-| <a name="input_no_gateway"></a> [no\_gateway](#input\_no\_gateway) | Sets whether a network should have a gateway | `string` | `"false"` | no |
+| <a name="input_no_gateway"></a> [no\_gateway](#input\_no\_gateway) | Sets whether a network should have a gateway | `string` | `false` | no |
 | <a name="input_os_region"></a> [os\_region](#input\_os\_region) | Region where network will be created | `string` | n/a | yes |
 | <a name="input_os_zone"></a> [os\_zone](#input\_os\_zone) | OS zone to be used | `string` | n/a | yes |
 | <a name="input_router_external_net_name"></a> [router\_external\_net\_name](#input\_router\_external\_net\_name) | Name of external network to be used | `string` | `"external-network"` | no |
 | <a name="input_router_name"></a> [router\_name](#input\_router\_name) | Router name to be created | `string` | `"router_1"` | no |
 | <a name="input_server_root_disk_gb"></a> [server\_root\_disk\_gb](#input\_server\_root\_disk\_gb) | List of disks | `list(number)` | <pre>[<br>  40<br>]</pre> | no |
 | <a name="input_server_volume_type"></a> [server\_volume\_type](#input\_server\_volume\_type) | List of disk types | `list(string)` | <pre>[<br>  "fast"<br>]</pre> | no |
-| <a name="input_subnet_cidr"></a> [subnet\_cidr](#input\_subnet\_cidr) | Subnet CIRD to be created | `string` | `"192.168.0.0/24"` | no |
+| <a name="input_subnet_cidr"></a> [subnet\_cidr](#input\_subnet\_cidr) | Subnet CIDR to be created | `string` | `"192.168.0.0/24"` | no |
 | <a name="input_vm_local_disk_gb"></a> [vm\_local\_disk\_gb](#input\_vm\_local\_disk\_gb) | Flavor's local disk size | `string` | `"0"` | no |
 | <a name="input_vm_name"></a> [vm\_name](#input\_vm\_name) | Name of VM to create | `string` | n/a | yes |
 | <a name="input_vm_ram_mb"></a> [vm\_ram\_mb](#input\_vm\_ram\_mb) | RAM in VMs flavor | `number` | `4096` | no |

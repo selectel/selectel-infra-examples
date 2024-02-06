@@ -9,7 +9,7 @@
 ## Providers
 
 | Name | Version |
-|------|---------|network_1
+|------|---------|
 | <a name="provider_selectel"></a> [selectel](#provider\_selectel) | >= 4.0.2 |
 
 ## Modules
