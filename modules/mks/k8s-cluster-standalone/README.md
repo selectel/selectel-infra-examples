@@ -9,7 +9,7 @@
 ## Providers
 
 | Name | Version |
-|------|---------|
+|------|---------|network_1
 | <a name="provider_selectel"></a> [selectel](#provider\_selectel) | >= 4.0.2 |
 
 ## Modules
@@ -55,6 +55,7 @@
 | <a name="input_ng_taints"></a> [ng\_taints](#input\_ng\_taints) | n/a | <pre>list(object({<br>    key    = string<br>    value  = string<br>    effect = string<br>  }))</pre> | `[]` | no |
 | <a name="input_ng_volume_gb"></a> [ng\_volume\_gb](#input\_ng\_volume\_gb) | n/a | `list(number)` | <pre>[<br>  32<br>]</pre> | no |
 | <a name="input_ng_volume_type"></a> [ng\_volume\_type](#input\_ng\_volume\_type) | n/a | `list(string)` | <pre>[<br>  "fast"<br>]</pre> | no |
+| <a name="input_no_gateway"></a> [no\_gateway](#input\_no\_gateway) | Sets whether a network should have a gateway | `string` | `false` | no |
 | <a name="input_nodegroups"></a> [nodegroups](#input\_nodegroups) | n/a | `string` | `1` | no |
 | <a name="input_os_auth_url"></a> [os\_auth\_url](#input\_os\_auth\_url) | n/a | `string` | `"https://api.selvpc.ru/identity/v3/auth/"` | no |
 | <a name="input_os_availability_zone"></a> [os\_availability\_zone](#input\_os\_availability\_zone) | n/a | `string` | n/a | yes |

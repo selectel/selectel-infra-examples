@@ -113,6 +113,7 @@ variable "enable_dhcp" {
 }
 
 variable "no_gateway" {
+  description = "Sets whether a network should have a gateway"
   type    = string
   default = false
 }
