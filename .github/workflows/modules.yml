@@ -52,11 +52,11 @@ jobs:
         -backend-config="unlock_method=DELETE"
         -backend-config="retry_wait_min=5"
 
-#    - name: Terraform apply
-#      run: terraform apply -auto-approve
-#
-#    - name: Terraform destroy
-#      run: terraform destroy -auto-approve
+    - name: Terraform apply
+      run: terraform apply -auto-approve
+
+    - name: Terraform destroy
+      run: terraform destroy -auto-approve
 
 #    - name: Telegram notify if job was failed
 #      if: ${{ failure() }}
