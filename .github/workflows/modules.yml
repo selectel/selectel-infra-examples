@@ -14,7 +14,7 @@ jobs:
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
       terraform_remote_state_address: ${{ secrets.GITLAB_STATE_ADDRESS }}
-    if: ${{ github.ref == "refs/heads/main" || github.event_name == "workflow_dispatch" }}
+    if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
 
     steps:
     - name: Checkout the repo
