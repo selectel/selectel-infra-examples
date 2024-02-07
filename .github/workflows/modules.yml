@@ -42,14 +42,14 @@ jobs:
 
     - name: Init Terraform
       run: >
-        terraform init -reconfigure 
-        -backend-config="address=$terraform_remote_state_address" 
+        terraform init -reconfigure
+        -backend-config="address=$terraform_remote_state_address"
         -backend-config="lock_address=$terraform_remote_state_address/lock" 
-        -backend-config="unlock_address=$terraform_remote_state_address/lock" 
-        -backend-config="username=${{ secrets.GITLAB_STATE_USERNAME }}" 
-        -backend-config="password=${{ secrets.GITLAB_STATE_TOKEN }}" 
-        -backend-config="lock_method=POST" 
-        -backend-config="unlock_method=DELETE" 
+        -backend-config="unlock_address=$terraform_remote_state_address/lock"
+        -backend-config="username=${{ secrets.GITLAB_STATE_USERNAME }}"
+        -backend-config="password=${{ secrets.GITLAB_STATE_TOKEN }}"
+        -backend-config="lock_method=POST"
+        -backend-config="unlock_method=DELETE"
         -backend-config="retry_wait_min=5"
 
 #    - name: Terraform apply
