@@ -108,7 +108,7 @@ module "mks" {
   source = "./modules/mks/k8s-cluster-standalone"
 
   cluster_name = "gh-cluster-test"
-  kube_version = "1.28.3" # Здесь важно выбрать доступную версию, может протухнуть
+  kube_version = "1.29.1" # Здесь важно выбрать доступную версию, может протухнуть
 
   os_availability_zone = "ru-9a"
   os_region            = "ru-9"
