@@ -163,6 +163,6 @@ variable "gpu_ng_taints" {
 
 variable "no_gateway" {
   description = "Sets whether a network should have a gateway"
-  type    = string
-  default = false
+  type        = string
+  default     = false
 }
