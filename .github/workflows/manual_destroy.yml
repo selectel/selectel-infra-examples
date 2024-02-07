@@ -1,0 +1,41 @@
+name: 'Manual Destroy'
+
+on:
+  workflow_dispatch:
+        
+jobs:
+  setup:
+    name: 'Manual Destroy'
+    runs-on: self-hosted
+    env:
+      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
+      TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
+      TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+      terraform_remote_state_address: ${{ secrets.GITLAB_STATE_ADDRESS }}
+
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v3
+
+    - name: Setup NodeJS v20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3.0.0
+
+    - name: Init Terraform
+      run: >
+        terraform init -reconfigure
+        -backend-config="address=$terraform_remote_state_address"
+        -backend-config="lock_address=$terraform_remote_state_address/lock" 
+        -backend-config="unlock_address=$terraform_remote_state_address/lock"
+        -backend-config="username=${{ secrets.GITLAB_STATE_USERNAME }}"
+        -backend-config="password=${{ secrets.GITLAB_STATE_TOKEN }}"
+        -backend-config="lock_method=POST"
+        -backend-config="unlock_method=DELETE"
+        -backend-config="retry_wait_min=5"
+
+    - name: Terraform destroy
+      run: terraform destroy -auto-approve
