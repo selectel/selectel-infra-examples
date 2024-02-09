@@ -13,6 +13,7 @@ jobs:
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+      terraform_remote_state_address: ${{ secrets.GITLAB_STATE_ADDRESS }}
     if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
 
     steps:
@@ -40,7 +41,16 @@ jobs:
       run: terraform fmt -diff -check -recursive
 
     - name: Init Terraform
-      run: terraform init
+      run: >
+        terraform init -reconfigure
+        -backend-config="address=$terraform_remote_state_address"
+        -backend-config="lock_address=$terraform_remote_state_address/lock" 
+        -backend-config="unlock_address=$terraform_remote_state_address/lock"
+        -backend-config="username=${{ secrets.GITLAB_STATE_USERNAME }}"
+        -backend-config="password=${{ secrets.GITLAB_STATE_TOKEN }}"
+        -backend-config="lock_method=POST"
+        -backend-config="unlock_method=DELETE"
+        -backend-config="retry_wait_min=5"
 
     - name: Terraform apply
       run: terraform apply -auto-approve
@@ -61,4 +71,4 @@ jobs:
           Не катится пайпа, необходимо принять меры, возможно внутренние пайпы с terraform так же не будут катиться.
 
           ⚡️Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          🔥 See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+          🔥 See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
