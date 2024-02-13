@@ -103,12 +103,18 @@ resource "openstack_networking_floatingip_associate_v2" "association_1" {
   ]
 }
 
+data "selectel_mks_kube_versions_v1" "versions" {
+  project_id = module.project-with-user.project_id
+  region     = "ru-9"
+}
+
 # Создаем MKS с cpu и gpu нод группами
 module "mks" {
   source = "./modules/mks/k8s-cluster-standalone"
 
   cluster_name = "gh-cluster-test"
-  kube_version = "1.29.1" # Здесь важно выбрать доступную версию, может протухнуть
+  kube_version = data.selectel_mks_kube_versions_v1.versions.latest_version
+  #kube_version = "1.29.1" # Здесь важно выбрать доступную версию, может протухнуть
 
   os_availability_zone = "ru-9a"
   os_region            = "ru-9"
