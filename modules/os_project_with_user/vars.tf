@@ -4,6 +4,6 @@ variable "os_project_name" {
 }
 
 variable "os_username" {
-  description = "Username of user create in OpenStack project"
+  description = "Username of service user to create in OpenStack project"
   type        = string
 }

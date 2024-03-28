@@ -3,13 +3,15 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_terracurl"></a> [terracurl](#requirement\_terracurl) | >= 1.0.1 |
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
+| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | >= 5.0.0 |
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_terracurl"></a> [terracurl](#provider\_terracurl) | >= 1.0.1 |
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
+| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | >= 5.0.0 |
 
 ## Modules
 
@@ -21,7 +23,8 @@
 
 | Name | Type |
 |------|------|
-| [terracurl_request.s3_credentials](https://registry.terraform.io/providers/devops-rob/terracurl/latest/docs/resources/request) | resource |
+| [selectel_iam_s3_credentials_v1.s3_credentials_1](https://registry.terraform.io/providers/devops-rob/terracurl/latest/docs/resources/request) | resource |
+
 
 ## Inputs
 

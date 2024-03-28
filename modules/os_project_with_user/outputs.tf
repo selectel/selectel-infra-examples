@@ -9,22 +9,17 @@ output "project_name" {
 }
 
 output "user_id" {
-  description = "ID of user, that admins the project"
-  value       = selectel_vpc_user_v2.user_1.id
+  description = "ID of user that admins the project"
+  value       = selectel_iam_serviceuser_v1.serviceuser_1.id
 }
 
 output "user_name" {
   description = "Username of created user"
-  value       = selectel_vpc_user_v2.user_1.name
-}
-
-output "role_id" {
-  description = "ID of created user role"
-  value       = selectel_vpc_role_v2.role_1.id
+  value       = selectel_iam_serviceuser_v1.serviceuser_1.name
 }
 
 output "user_password" {
   description = "Password of created user. Generated automatically."
-  value       = random_password.user_1_password.result
+  value       = random_password.serviceuser_1_password.result
   sensitive   = true
 }

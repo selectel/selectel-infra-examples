@@ -1,19 +1,18 @@
 # Запуск модулей
 
-# Создаем проект с пользователем
-# данный модуль создать проект/пользователя и креды для него
+# Создаём проект с пользователем
 module "project-with-user" {
   source          = "./modules/os_project_with_user"
   os_project_name = "gh_test_tf_modules"
   os_username     = "gh_test_tf_user"
 }
 
-# Создаём виртуалку и все что необходимо для ее работы
+# Создаём виртуалку и всё, что необходимо для её работы
 module "vm" {
   source              = "./modules/vm"
   os_region           = "ru-9"
   os_zone             = "ru-9a"
-  vm_name             = "test-vm"
+  vm_name             = "github-vm"
   server_root_disk_gb = ["10"]
   vm_vcpus            = 4
   vm_ram_mb           = 4096
@@ -24,7 +23,7 @@ module "vm" {
   ]
 }
 
-# Создаём simple file storage в ту же сеть что и виртуальная машина
+# Создаём simple file storage в той же сети, где находится виртуальная машина
 module "sfs" {
   source               = "./modules/sfs"
   os_availability_zone = "ru-9a"
@@ -38,7 +37,7 @@ module "sfs" {
   ]
 }
 
-# S3 нет в провайдере selectel, поэтому под капотом terracurl
+# S3 нет в провайдере Selectel, поэтому под капотом terracurl
 
 # Создаём S3-ключ для пользователя
 module "s3-creds" {
@@ -48,14 +47,14 @@ module "s3-creds" {
   os_password      = var.selectel_user_admin_password
   os_user_id       = module.project-with-user.user_id
   os_project_id    = module.project-with-user.project_id
-  credentials_name = "gh-s3-cred"
+  credentials_name = "github-s3-creds"
 
   depends_on = [
     module.project-with-user
   ]
 }
 
-# Создаём s3 bucket
+# Создаём S3-bucket
 module "s3-bucket" {
   source          = "./modules/s3/s3-bucket"
   os_account      = var.selectel_domain_name
@@ -63,14 +62,14 @@ module "s3-bucket" {
   os_password     = module.project-with-user.user_password
   os_project_id   = module.project-with-user.project_id
   os_project_name = module.project-with-user.project_name
-  s3_bucket_name  = "s3-gh-test"
+  s3_bucket_name  = "github-s3-bucket"
 
   depends_on = [
     module.project-with-user
   ]
 }
 
-# Создаем CRaaS
+# Создаём CRaaS
 module "craas" {
   source        = "./modules/craas"
   os_project_id = module.project-with-user.project_id
@@ -81,9 +80,9 @@ module "craas" {
   ]
 }
 
-# Приатачим плавающий ip к виртуалке
+# Аттачим floating IP к виртуалке
 
-# создадим floating ip
+# Создаём floating IP
 module "fl_ip" {
   source = "./modules/floatingip"
   region = "ru-9"
@@ -103,12 +102,18 @@ resource "openstack_networking_floatingip_associate_v2" "association_1" {
   ]
 }
 
-# Создаем MKS с cpu и gpu нод группами
+# Запрашиваем данные, из которых позже возьмём последнюю версию K8s
+data "selectel_mks_kube_versions_v1" "versions" {
+  project_id = module.project-with-user.project_id
+  region     = "ru-9"
+}
+
+# Создаём MKS с CPU и GPU нод-группами
 module "mks" {
   source = "./modules/mks/k8s-cluster-standalone"
 
   cluster_name = "gh-cluster-test"
-  kube_version = "1.29.1" # Здесь важно выбрать доступную версию, может протухнуть
+  kube_version = data.selectel_mks_kube_versions_v1.versions.latest_version
 
   os_availability_zone = "ru-9a"
   os_region            = "ru-9"
