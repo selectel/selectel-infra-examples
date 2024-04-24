@@ -2,13 +2,13 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | >= 4.0.2 |
+| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | 5.0.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | >= 4.0.2 |
+| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | 5.0.2 |
 
 ## Modules
 
@@ -18,8 +18,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [selectel_craas_registry_v1.registry_1](https://registry.terraform.io/providers/selectel/selectel/latest/docs/resources/craas_registry_v1) | resource |
-| [selectel_craas_token_v1.token_1](https://registry.terraform.io/providers/selectel/selectel/latest/docs/resources/craas_token_v1) | resource |
+| [selectel_craas_registry_v1.registry_1](https://registry.terraform.io/providers/selectel/selectel/5.0.2/docs/resources/craas_registry_v1) | resource |
+| [selectel_craas_token_v1.token_1](https://registry.terraform.io/providers/selectel/selectel/5.0.2/docs/resources/craas_token_v1) | resource |
 
 ## Inputs
 
