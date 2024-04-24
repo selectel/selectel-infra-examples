@@ -1,8 +1,8 @@
 terraform {
   required_providers {
-    terracurl = {
-      source  = "devops-rob/terracurl"
-      version = ">= 1.0.1"
+    selectel = {
+      source  = "selectel/selectel"
+      version = "5.0.2"
     }
   }
   required_version = ">= 1.0.0"
