@@ -42,9 +42,6 @@ module "sfs" {
 # Создаём S3-ключ для пользователя
 module "s3-creds" {
   source           = "./modules/s3/s3-credentials"
-  os_account       = var.selectel_domain_name
-  os_username      = var.selectel_user_admin_user
-  os_password      = var.selectel_user_admin_password
   os_user_id       = module.project-with-user.user_id
   os_project_id    = module.project-with-user.project_id
   credentials_name = "github-s3-creds"
