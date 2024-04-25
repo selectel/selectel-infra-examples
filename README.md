@@ -74,7 +74,7 @@ terraform plan/apply \
 
 - Ввести с клавиатуры, если переменные не были заданы любым другим способом
 
-После успешного выполнения команды `terraform apply` вы должны увидеть в своём аккаунте новый проект, в котором будет запущены все модули (MKS, SFS, vm, CRaaS и др.)
+После успешного выполнения команды `terraform apply` вы должны увидеть в своём аккаунте новый проект, в котором будут запущены все модули (MKS, SFS, vm, CRaaS и др.)
 
 ## Repository structure
 
@@ -94,8 +94,8 @@ terraform plan/apply \
   * [network](modules/network) - создание локальной сети
   * [os_project_with_user](modules/os_project_with_user) - создание проекта в облаке Selectel
   * [s3](modules/s3) - создание [объектного хранилища s3](https://selectel.ru/services/cloud/storage/)
-    * [s3](modules/s3-bucket) - создание s3 бакета
-    * [s3](modules/s3-credentioals) - создание s3 параметров авторизации
+    * [s3-bucket](modules/s3-bucket) - создание s3 бакета
+    * [s3-credentials](modules/s3-credentioals) - создание s3 параметров авторизации
   * [selectel-token](modules/selectel) - создание токена аккаунта Selectel
   * [sfs](modules/sfs) - создание [файлового хранилища](https://selectel.ru/lab/file-storage/)
   * [vm](modules/vm) - создание [виртуального облачного сервера](https://selectel.ru/services/cloud/servers/)

@@ -3,13 +3,13 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
-| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | >= 4.0.2 |
+| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | 5.0.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | >= 4.0.2 |
+| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | 5.0.2 |
 
 ## Modules
 
@@ -19,7 +19,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [selectel_mks_cluster_v1.cluster_1](https://registry.terraform.io/providers/selectel/selectel/latest/docs/resources/mks_cluster_v1) | resource |
+| [selectel_mks_cluster_v1.cluster_1](https://registry.terraform.io/providers/selectel/selectel/5.0.2/docs/resources/mks_cluster_v1) | resource |
 
 ## Inputs
 
