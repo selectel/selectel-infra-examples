@@ -34,6 +34,8 @@ jobs:
         -backend-config="skip_region_validation=true"
         -backend-config="skip_credentials_validation=true"
         -backend-config="skip_requesting_account_id=true"
+        -backend-config="force_path_style=true"
+        -backend-config="skip_metadata_api_check=true"
         -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
         -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
 
