@@ -13,7 +13,6 @@ jobs:
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
-      terraform_remote_state_address: ${{ secrets.GITLAB_STATE_ADDRESS }}
     if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
 
     steps:
@@ -42,14 +41,14 @@ jobs:
 
     - name: Init Terraform
       run: >
-        terraform init -reconfigure \
-        -backend-config="bucket=github-terraform-state" \
-        -backend-config="endpoint=s3.ru-1.storage.selcloud.ru" \
-        -backend-config="key=github-infra-examples.tfstate" \
-        -backend-config="region=ru-1" \
-        -backend-config="skip_region_validation=true" \
-        -backend-config="skip_credentials_validation=true" \
-        -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}" \
+        terraform init -reconfigure
+        -backend-config="bucket=github-terraform-state"
+        -backend-config="endpoint=s3.ru-1.storage.selcloud.ru"
+        -backend-config="key=github-infra-examples.tfstate"
+        -backend-config="region=ru-1"
+        -backend-config="skip_region_validation=true"
+        -backend-config="skip_credentials_validation=true"
+        -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
         -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
 
     - name: Terraform apply
