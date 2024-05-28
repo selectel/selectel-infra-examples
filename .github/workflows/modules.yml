@@ -44,7 +44,7 @@ jobs:
         terraform init -reconfigure
         -backend-config="bucket=github-terraform-state"
         -backend-config="endpoint=https://s3.ru-1.storage.selcloud.ru"
-        -backend-config="key=github-infra-examples.tfstate"
+        -backend-config="key=github-infra-examples.json"
         -backend-config="region=ru-1"
         -backend-config="skip_region_validation=true"
         -backend-config="skip_credentials_validation=true"
