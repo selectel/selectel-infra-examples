@@ -4,13 +4,13 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
 | <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
-| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | 5.0.2 |
+| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | >=5.0.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | 5.0.2 |
+| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | >=5.0.2 |
 
 ## Modules
 
@@ -25,7 +25,7 @@
 
 | Name | Type |
 |------|------|
-| [selectel_mks_kubeconfig_v1.kubeconfig](https://registry.terraform.io/providers/selectel/selectel/5.0.2/docs/data-sources/mks_kubeconfig_v1) | data source |
+| [selectel_mks_kubeconfig_v1.kubeconfig](https://registry.terraform.io/providers/selectel/selectel/latest/docs/data-sources/mks_kubeconfig_v1) | data source |
 
 ## Inputs
 
