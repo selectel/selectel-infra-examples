@@ -43,7 +43,7 @@ jobs:
       run: >
         terraform init -reconfigure
         -backend-config="bucket=github-terraform-state"
-        -backend-config="endpoint=s3.ru-1.storage.selcloud.ru"
+        -backend-config="endpoints.s3=s3.ru-1.storage.selcloud.ru"
         -backend-config="key=github-infra-examples.tfstate"
         -backend-config="region=ru-1"
         -backend-config="skip_region_validation=true"
