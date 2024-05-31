@@ -8,13 +8,24 @@
 
 ## Usage
 
-1. Инициализировать Terraform Backend
+1. Перед использованием проверьте версию Terraform, данный репозиторий имеет ограничение на использование, по-причине хранения стейта в S3.
+
+```bash
+terraform {
+  backend "s3" {}
+  required_version = ">= 1.0.0, <= 1.5.7"
+}
+```
+
+подробнее о проблеме можно ознакомиться на офф. странице [тут](https://developer.hashicorp.com/terraform/language/upgrade-guides). 
+
+2. Инициализировать Terraform Backend
 
 ```bash
 terraform init
 ```
 
-2. Создать файл `main.tf`, где описана необходимая инфраструктура (пример ниже - создание `Simple File Storage`)
+3. Создать файл `main.tf`, где описана необходимая инфраструктура (пример ниже - создание `Simple File Storage`)
 
 ```yaml
 module "sfs" {
@@ -27,7 +38,7 @@ module "sfs" {
 }
 ```
 
-3. Для проверки и применения настроек необходимо запустить команды `terraform plan/apply`
+4. Для проверки и применения настроек необходимо запустить команды `terraform plan/apply`
 
 
 ```bash

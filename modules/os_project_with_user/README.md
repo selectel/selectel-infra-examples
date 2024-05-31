@@ -4,14 +4,14 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.3.2 |
-| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | 5.0.2 |
+| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | >=5.0.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_random"></a> [random](#provider\_random) | >= 3.3.2 |
-| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | 5.0.2 |
+| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | >=5.0.2 |
 
 ## Modules
 
@@ -22,8 +22,8 @@ No modules.
 | Name | Type |
 |------|------|
 | [random_password.serviceuser_1_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
-| [selectel_iam_serviceuser_v1.serviceuser_1](https://registry.terraform.io/providers/selectel/selectel/5.0.2/docs/resources/iam_serviceuser_v1) | resource |
-| [selectel_vpc_project_v2.project_1](https://registry.terraform.io/providers/selectel/selectel/5.0.2/docs/resources/vpc_project_v2) | resource |
+| [selectel_iam_serviceuser_v1.serviceuser_1](https://registry.terraform.io/providers/selectel/selectel/latest/docs/resources/iam_serviceuser_v1) | resource |
+| [selectel_vpc_project_v2.project_1](https://registry.terraform.io/providers/selectel/selectel/latest/docs/resources/vpc_project_v2) | resource |
 
 ## Inputs
 

@@ -11,7 +11,6 @@ jobs:
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
-      terraform_remote_state_address: ${{ secrets.GITLAB_STATE_ADDRESS }}
 
     steps:
     - name: Checkout the repo
@@ -24,18 +23,20 @@ jobs:
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3.0.0
+      with:
+        terraform_version: "1.5.7"
 
     - name: Init Terraform
       run: >
         terraform init -reconfigure
-        -backend-config="address=$terraform_remote_state_address"
-        -backend-config="lock_address=$terraform_remote_state_address/lock" 
-        -backend-config="unlock_address=$terraform_remote_state_address/lock"
-        -backend-config="username=${{ secrets.GITLAB_STATE_USERNAME }}"
-        -backend-config="password=${{ secrets.GITLAB_STATE_TOKEN }}"
-        -backend-config="lock_method=POST"
-        -backend-config="unlock_method=DELETE"
-        -backend-config="retry_wait_min=5"
+        -backend-config="bucket=github-terraform-state"
+        -backend-config="endpoint=s3.ru-1.storage.selcloud.ru"
+        -backend-config="key=github-infra-examples.tfstate"
+        -backend-config="region=ru-1"
+        -backend-config="skip_region_validation=true"
+        -backend-config="skip_credentials_validation=true"
+        -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
+        -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
 
     - name: Terraform destroy
       run: terraform destroy -auto-approve
