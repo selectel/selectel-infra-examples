@@ -1,0 +1,50 @@
+name: 'Test Opentofu Selectel Terraform modules'
+
+on:
+  push:
+    branches:
+      - opentofu-add
+  workflow_dispatch:
+
+jobs:
+  setup:
+    name: 'Test Opentofu Selectel Terraform modules'
+    runs-on: self-hosted
+    env:
+      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
+      TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
+      TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+    if: ${{ github.ref == 'refs/heads/opentofu-add' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v4
+
+    - name: Setup OpenTofu
+      uses: opentofu/setup-opentofu@v1
+      with:
+        tofu_version: 1.6.2
+
+    - name: Lint OpenTofu
+      run: tofu fmt -diff -check -recursive
+
+    - name: Init OpenTofu
+      run: >
+        tofu init -reconfigure
+        -backend-config="bucket=github-terraform-state"
+        -backend-config="endpoint=s3.ru-1.storage.selcloud.ru"
+        -backend-config="key=github-infra-examples.tfstate"
+        -backend-config="region=ru-1"
+        -backend-config="skip_region_validation=true"
+        -backend-config="skip_credentials_validation=true"
+        -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
+        -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
+
+    - name: OpenTofu plan
+      run: tofu plan
+
+    # - name: OpenTofu apply
+    #   run: tofu apply -auto-approve
+
+    # - name: OpenTofu destroy
+    #   run: tofu destroy -auto-approve
