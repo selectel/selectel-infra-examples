@@ -38,6 +38,9 @@ jobs:
 #        framework: terraform,github_actions
 #        container_user: 1000
 
+    - name: add .terraformrc
+      run: echo -e "provider_installation { \n filesystem_mirror { \n  path    = "$GITHUB_WORKSPACE/providers" \n  include = ["registry.terraform.io/*/*"] \n  } \n }" > ~./terraformrc
+
     - name: Lint Terraform
       run: terraform fmt -diff -check -recursive
 
