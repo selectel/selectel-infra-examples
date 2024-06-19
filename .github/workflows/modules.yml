@@ -38,7 +38,7 @@ jobs:
 #        framework: terraform,github_actions
 #        container_user: 1000
 
-    - name: add .terraformrc
+    - name: Add .terraformrc
       shell: bash
       run:  |
         cat <<EOS >> $HOME/.terraformrc
@@ -64,6 +64,9 @@ jobs:
         -backend-config="skip_credentials_validation=true"
         -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
         -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
+
+    - name: Chmod providers
+      run: chmod -R 777 $GITHUB_WORKSPACE/providers
 
     - name: Terraform apply
       run: terraform apply -auto-approve
