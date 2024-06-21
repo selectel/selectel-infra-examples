@@ -1,11 +1,11 @@
 terraform {
   required_providers {
     selectel = {
-      source  = "selectel/selectel"
+      source  = "registry.terraform.io/selectel/selectel"
       version = ">=5.0.2"
     }
     random = {
-      source  = "hashicorp/random"
+      source  = "registry.terraform.io/hashicorp/random"
       version = ">= 3.3.2"
     }
   }
