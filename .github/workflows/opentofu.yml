@@ -1,9 +1,8 @@
 name: 'Test Opentofu Selectel Terraform modules'
 
 on:
-  push:
-    branches:
-      - opentofu-add
+  schedule:
+    - cron: '0 8 * * *' # run every day at 11:00 MSK
   workflow_dispatch:
 
 jobs:
