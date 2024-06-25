@@ -7,8 +7,9 @@
 
 - [Selectel Terraform Modules Example](#selectel-terraform-modules-example)
   - [Использование](#использование)
-    - [1. State File](#1-state-file)
-    - [2. Init](#2-init)
+    - [1. Terraformrc](#1-terraformrc)
+    - [2. State File](#2-state-file)
+    - [3. Init](#3-init)
   - [Пример использования](#пример-использования)
   - [Структура репозитория](#структура-репозитория)
     - [Modules](#modules)
@@ -30,7 +31,22 @@
 > 
 > Так же убедитесь, что в вашем env нет других переменных вида "OS_*" их наличие повлияет на провайдер Openstack!
 
-### 1. State File
+### 1. Terraformrc
+
+Для того чтобы у Вас не было проблем при использовании репозитория - были перенесены все используемые провайдеры в папку [providers](https://github.com/selectel/selectel-infra-examples/tree/main/providers). Чтобы заставить terraform cмотреть в эту папку потребуется создать файл `terraformrc`:
+
+```bash
+cat <<EOS >> $HOME/.terraformrc
+provider_installation {
+    filesystem_mirror { 
+      path    = "$GITHUB_WORKSPACE/providers"
+      include = ["registry.terraform.io/*/*"]
+    }
+}
+EOS
+```
+
+### 2. State File
 
 Cтейт-файл в репозитории указан `s3`.
 **Для локального запуска** потребуется изменить на `local` в файле [versions.tf](https://github.com/selectel/selectel-infra-examples/blob/main/versions.tf#L12):
@@ -77,7 +93,7 @@ terraform {
 ```
 </details>
 
-### 2. Init
+### 3. Init
 
 Вы можете использовать все модули, которые есть в репозитории или закомментировать лишние, но учтите, что **в первую очередь создается проект с сервисным пользователем**, которые необходимы для провайдера `Openstack`. 
 
