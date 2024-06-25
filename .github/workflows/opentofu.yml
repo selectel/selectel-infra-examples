@@ -1,9 +1,8 @@
 name: 'Test Opentofu Selectel Terraform modules'
 
 on:
-  push:
-    branches:
-      - opentofu-add
+  schedule:
+    - cron: '0 8 * * *' # run every day at 11:00 MSK
   workflow_dispatch:
 
 jobs:
@@ -40,11 +39,8 @@ jobs:
         -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
         -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
 
-    - name: OpenTofu plan
-      run: tofu plan
+    - name: OpenTofu apply
+      run: tofu apply -auto-approve
 
-    # - name: OpenTofu apply
-    #   run: tofu apply -auto-approve
-
-    # - name: OpenTofu destroy
-    #   run: tofu destroy -auto-approve
+    - name: OpenTofu destroy
+      run: tofu destroy -auto-approve
