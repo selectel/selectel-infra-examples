@@ -27,7 +27,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3.0.0
       with:
-        terraform_version: "1.5.7"
+        terraform_version: "1.5.5"
 
 #    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
 #      uses: bridgecrewio/checkov-action@v12
