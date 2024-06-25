@@ -1,8 +1,9 @@
 # Selectel Terraform Modules Example
 
-[![Terraform - Selectel Terraform modules](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml) [![version](https://img.shields.io/badge/terraform-1.6.2-green.svg)](https://github.com/hashicorp/terraform/releases/tag/v1.6.2)
-
-[![OpenTofu - Selectel Terraform modules](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml) [![version](https://img.shields.io/badge/opentofu-1.6.2-yellow.svg)](https://github.com/opentofu/opentofu/releases/tag/v1.6.2)
+| Pipeline Status | Version |
+|-------|---------|
+| [![Terraform - Selectel Terraform modules](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml) | [![version](https://img.shields.io/badge/terraform-1.5.5-green.svg)](https://github.com/hashicorp/terraform/releases/tag/v1.5.5) - Версия до BSL лицензии |
+| [![OpenTofu - Selectel Terraform modules](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml) | [![version](https://img.shields.io/badge/opentofu-1.6.2-yellow.svg)](https://github.com/opentofu/opentofu/releases/tag/v1.6.2) |
 
 - [Selectel Terraform Modules Example](#selectel-terraform-modules-example)
   - [Использование](#использование)
