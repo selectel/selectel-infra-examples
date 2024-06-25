@@ -48,7 +48,7 @@ EOS
 
 ### 2. State File
 
-Cтейт-файл в репозитории указан `s3`.
+По-умолчанию в репозитории стейт хранится в `s3`.
 **Для локального запуска** потребуется изменить на `local` в файле [versions.tf](https://github.com/selectel/selectel-infra-examples/blob/main/versions.tf#L12):
 
 ```tf
