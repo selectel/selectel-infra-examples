@@ -129,7 +129,7 @@ module "mks" {
   gpu_ng_volume_gb   = [100]
   gpu_ng_volume_type = ["fast"]
   gpu_ng_labels      = [{ "role" : "gpu" }]
-  gpu_ng_flavor      = ["3021"]
+  gpu_ng_flavor      = ["3041"]
 
   nat_subnet_cidr   = "10.222.0.0/16"
   enable_autorepair = false
