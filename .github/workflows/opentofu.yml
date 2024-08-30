@@ -24,6 +24,18 @@ jobs:
       with:
         tofu_version: 1.6.2
 
+    - name: Add .tofurc
+      shell: bash
+      run: |
+        cat <<EOS >> $HOME/.tofurc
+        provider_installation {
+            filesystem_mirror { 
+              path    = "$GITHUB_WORKSPACE/providers"
+              include = ["registry.terraform.io/*/*"]
+            }
+        }
+        EOS
+
     - name: Lint OpenTofu
       run: tofu fmt -diff -check -recursive
 
@@ -38,6 +50,9 @@ jobs:
         -backend-config="skip_credentials_validation=true"
         -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
         -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
+
+    - name: Chmod providers
+      run: chmod -R 777 $GITHUB_WORKSPACE/providers
 
     - name: OpenTofu apply
       run: tofu apply -auto-approve
