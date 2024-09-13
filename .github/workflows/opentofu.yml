@@ -29,9 +29,8 @@ jobs:
       run: |
         cat <<EOS >> $HOME/.tofurc
         provider_installation {
-            filesystem_mirror { 
-              path    = "$GITHUB_WORKSPACE/providers"
-              include = ["registry.terraform.io/*/*"]
+            network_mirror {
+              url = "https://tf-proxy.selectel.ru/mirror/v1/"
             }
         }
         EOS
