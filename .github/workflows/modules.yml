@@ -40,7 +40,7 @@ jobs:
 
     - name: Add .terraformrc
       shell: bash
-      run:  |
+      run: |
         cat <<EOS >> $HOME/.terraformrc
         provider_installation {
             network_mirror {

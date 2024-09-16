@@ -20,9 +20,6 @@
 
 Перед началом работы с облачными ресурсами Selectel через Terraform/OpenTofu рекомендуем ознакомиться с [документацией по провайдеру Selectel/OpenStack](https://docs.selectel.ru/terraform/).
 
-> **ВАЖНО!**
-> С версии репозитория >= 2.0.1 было добавлено тестирование запуска terraform кода через [OpenTofu](https://opentofu.org/). В связи с блокировкой terraform registry из РФ. Необходимость в terraform-proxy или terraform-mirror усложняет использование terraform. OpenTofu позволяет без проксей, зеркал и изменений в коде использовать все теже провайдеры, что лежат в registry.terraform.io. Все провайдеры OpenTofu лежат в репозитории - [ссылка](https://github.com/opentofu/registry/tree/main/providers). Так же документация по провайдерам от OpenTofu - [ссылка](https://opentofu.org/docs/language/providers/).
-
 ## Использование
 
 > Далее все команды terraform-cli могут быть заменены на tofu. Будут работать оба варианта.
@@ -33,14 +30,13 @@
 
 ### 1. Terraformrc
 
-Для того чтобы у Вас не было проблем при использовании репозитория - были перенесены все используемые провайдеры в папку [providers](https://github.com/selectel/selectel-infra-examples/tree/main/providers). Чтобы заставить terraform cмотреть в эту папку потребуется создать файл `terraformrc`:
+Для доступа к Terraform Registry из РФ можно воспользоваться кеширующим прокси Selectel, для этого отредактируем файл .terraformrc (или .tofurc для OpenTofu):
 
 ```bash
 cat <<EOS >> $HOME/.terraformrc
 provider_installation {
-    filesystem_mirror { 
-      path    = "$GITHUB_WORKSPACE/providers"
-      include = ["registry.terraform.io/*/*"]
+    network_mirror {
+      url = "https://tf-proxy.selectel.ru/mirror/v1/"
     }
 }
 EOS
