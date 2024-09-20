@@ -40,12 +40,11 @@ jobs:
 
     - name: Add .terraformrc
       shell: bash
-      run:  |
+      run: |
         cat <<EOS >> $HOME/.terraformrc
         provider_installation {
-            filesystem_mirror { 
-              path    = "$GITHUB_WORKSPACE/providers"
-              include = ["registry.terraform.io/*/*"]
+            network_mirror {
+              url = "https://tf-proxy.selectel.ru/mirror/v1/"
             }
         }
         EOS
@@ -64,9 +63,6 @@ jobs:
         -backend-config="skip_credentials_validation=true"
         -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
         -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
-
-    - name: Chmod providers
-      run: chmod -R 777 $GITHUB_WORKSPACE/providers
 
     - name: Terraform apply
       run: terraform apply -auto-approve
