@@ -10,6 +10,7 @@ jobs:
     name: 'Test Selectel Terraform modules'
     runs-on: self-hosted
     env:
+      terraform_link: https://releases.hashicorp.com/terraform/1.5.5/terraform_1.5.5_linux_amd64.zip
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
@@ -25,9 +26,16 @@ jobs:
         node-version: 20
 
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-        terraform_version: "1.5.5"
+      shell: bash
+      run: |
+        curl -o terraform $terraform_link
+        chmod 755 terraform
+        mv terraform /usr/local/bin
+
+#    - name: Setup Terraform
+#      uses: hashicorp/setup-terraform@v3
+#      with:
+#        terraform_version: "1.5.5"
 
 #    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
 #      uses: bridgecrewio/checkov-action@v12
