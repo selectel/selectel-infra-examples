@@ -29,15 +29,9 @@ jobs:
       shell: bash
       run: |
         curl -o terraform.zip $terraform_link
-        apt-get install unzip
         unzip terraform.zip
         chmod 755 terraform
         mv terraform /usr/local/bin
-
-#    - name: Setup Terraform
-#      uses: hashicorp/setup-terraform@v3
-#      with:
-#        terraform_version: "1.5.5"
 
 #    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
 #      uses: bridgecrewio/checkov-action@v12
@@ -80,17 +74,17 @@ jobs:
     - name: Terraform destroy
       run: terraform destroy -auto-approve
 
-#    - name: Telegram notify if job was failed
-#      if: ${{ failure() }}
-#      uses: appleboy/telegram-action@master
-#      with:
-#        to: ${{ secrets.TELEGRAM_TO }}
-#        token: ${{ secrets.TELEGRAM_TOKEN }}
-#        message: |
-#          -= GITHUB public repository selectel/selectel-infra-examples =-
-#          Terraform modules build pipeline was failed
-#          🚨 Critical
-#          Не катится пайпа, необходимо принять меры, возможно внутренние пайпы с terraform так же не будут катиться.
-#
-#          ⚡️Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-#          🔥 See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+    - name: Telegram notify if job was failed
+      if: ${{ failure() }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          -= GITHUB public repository selectel/selectel-infra-examples =-
+          Terraform modules build pipeline was failed
+          🚨 Critical
+          Не катится пайпа, необходимо принять меры, возможно внутренние пайпы с terraform так же не будут катиться.
+
+          ⚡️Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          🔥 See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
