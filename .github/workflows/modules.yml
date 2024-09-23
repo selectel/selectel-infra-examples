@@ -28,7 +28,8 @@ jobs:
     - name: Setup Terraform
       shell: bash
       run: |
-        curl -o terraform $terraform_link
+        curl -o terraform.zip $terraform_link
+        tar -xzf terraform.zip
         chmod 755 terraform
         mv terraform /usr/local/bin
 
