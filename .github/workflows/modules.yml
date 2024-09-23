@@ -30,6 +30,7 @@ jobs:
       run: |
         curl -o terraform.zip $terraform_link
         unzip terraform.zip
+        rm terraform.zip
         chmod 755 terraform
         mv terraform /usr/local/bin
 
