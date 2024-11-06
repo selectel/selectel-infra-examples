@@ -14,6 +14,7 @@ jobs:
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+      TF_VAR_flavor_name: ${{ secrets.FLAVOR_NAME }}
     if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
 
     steps:

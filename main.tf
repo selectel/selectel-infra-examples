@@ -12,7 +12,7 @@ module "vm" {
   source              = "./modules/vm"
   os_region           = "ru-9"
   os_zone             = "ru-9a"
-  vm_name             = "github-vm"
+  vm_name             = var.flavor_name
   server_root_disk_gb = ["10"]
   vm_vcpus            = 4
   vm_ram_mb           = 4096
