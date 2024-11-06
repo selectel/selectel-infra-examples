@@ -124,7 +124,7 @@ module "mks" {
   ng_volume_type = ["fast"]
   ng_labels      = [{ "role" : "cpu" }]
 
-  gpu_nodegroups     = 1
+  gpu_nodegroups     = 0
   gpu_ng_nodes_count = [1]
   gpu_ng_volume_gb   = [100]
   gpu_ng_volume_type = ["fast"]
