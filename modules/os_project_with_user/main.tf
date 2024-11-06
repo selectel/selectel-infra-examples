@@ -3,10 +3,8 @@ resource "selectel_vpc_project_v2" "project_1" {
 }
 
 resource "random_password" "serviceuser_1_password" {
-  length           = 32
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-  min_special      = 3
+  length           = 24
+  special          = false
   min_numeric      = 1
   min_lower        = 1
   min_upper        = 1
