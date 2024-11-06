@@ -1,3 +1,4 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -18,8 +19,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [selectel_craas_registry_v1.registry_1](https://registry.terraform.io/providers/selectel/selectel/latest/docs/resources/craas_registry_v1) | resource |
-| [selectel_craas_token_v1.token_1](https://registry.terraform.io/providers/selectel/selectel/latest/docs/resources/craas_token_v1) | resource |
+| selectel_craas_registry_v1.registry_1 | resource |
+| selectel_craas_token_v1.token_1 | resource |
 
 ## Inputs
 
@@ -34,3 +35,4 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_craas_password"></a> [craas\_password](#output\_craas\_password) | craas token |
+<!-- END_TF_DOCS -->

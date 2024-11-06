@@ -1,16 +1,17 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | '>= 1.0.0, <= 1.5.7' |
-| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <= 1.6.2 |
+| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 3.0.0 |
 | <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | 5.1.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 3.0.0 |
 | <a name="provider_selectel"></a> [selectel](#provider\_selectel) | 5.1.1 |
 
 ## Modules
@@ -30,13 +31,14 @@
 
 | Name | Type |
 |------|------|
-| [openstack_networking_floatingip_associate_v2.association_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/resources/networking_floatingip_associate_v2) | resource |
-| [selectel_mks_kube_versions_v1.versions](https://registry.terraform.io/providers/selectel/selectel/5.1.1/docs/data-sources/mks_kube_versions_v1) | data source |
+| [openstack_networking_floatingip_associate_v2.association_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/networking_floatingip_associate_v2) | resource |
+| selectel_mks_kube_versions_v1.versions | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_flavor_name"></a> [flavor\_name](#input\_flavor\_name) | Название флавора | `string` | n/a | yes |
 | <a name="input_os_auth_url"></a> [os\_auth\_url](#input\_os\_auth\_url) | URL до openstack api | `string` | `"https://cloud.api.selcloud.ru/identity/v3"` | no |
 | <a name="input_selectel_domain_name"></a> [selectel\_domain\_name](#input\_selectel\_domain\_name) | ID Selectel аккаунта | `string` | n/a | yes |
 | <a name="input_selectel_user_admin_password"></a> [selectel\_user\_admin\_password](#input\_selectel\_user\_admin\_password) | Пароль от сервисного пользователя | `string` | n/a | yes |
@@ -45,3 +47,4 @@
 ## Outputs
 
 No outputs.
+<!-- END_TF_DOCS -->

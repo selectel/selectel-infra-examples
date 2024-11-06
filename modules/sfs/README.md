@@ -1,15 +1,15 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
-| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
+| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 3.0.0 |
 
 ## Modules
 
@@ -19,9 +19,9 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [openstack_sharedfilesystem_share_access_v2.share_access_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/resources/sharedfilesystem_share_access_v2) | resource |
-| [openstack_sharedfilesystem_share_v2.sfs_share](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/resources/sharedfilesystem_share_v2) | resource |
-| [openstack_sharedfilesystem_sharenetwork_v2.sfs_sharenetwork](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/resources/sharedfilesystem_sharenetwork_v2) | resource |
+| [openstack_sharedfilesystem_share_access_v2.share_access_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/sharedfilesystem_share_access_v2) | resource |
+| [openstack_sharedfilesystem_share_v2.sfs_share](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/sharedfilesystem_share_v2) | resource |
+| [openstack_sharedfilesystem_sharenetwork_v2.sfs_sharenetwork](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/sharedfilesystem_sharenetwork_v2) | resource |
 
 ## Inputs
 
@@ -42,3 +42,4 @@ No modules.
 |------|-------------|
 | <a name="output_sfs_address"></a> [sfs\_address](#output\_sfs\_address) | SFS path |
 | <a name="output_sfs_addressess"></a> [sfs\_addressess](#output\_sfs\_addressess) | SFS paths array. For debug purposes |
+<!-- END_TF_DOCS -->

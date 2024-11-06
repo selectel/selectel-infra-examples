@@ -1,8 +1,8 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | >=5.0.2 |
 
 ## Providers
@@ -19,7 +19,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [selectel_iam_s3_credentials_v1.s3_credentials_1](https://registry.terraform.io/providers/selectel/selectel/latest/docs/resources/iam_s3_credentials_v1) | resource |
+| selectel_iam_s3_credentials_v1.s3_credentials_1 | resource |
 
 ## Inputs
 
@@ -35,3 +35,4 @@ No modules.
 |------|-------------|
 | <a name="output_s3_credentials_access_key"></a> [s3\_credentials\_access\_key](#output\_s3\_credentials\_access\_key) | n/a |
 | <a name="output_s3_credentials_secret_key"></a> [s3\_credentials\_secret\_key](#output\_s3\_credentials\_secret\_key) | n/a |
+<!-- END_TF_DOCS -->

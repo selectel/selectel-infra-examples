@@ -1,16 +1,16 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
-| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
+| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 3.0.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.3.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 3.0.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | >= 3.3.2 |
 
 ## Modules
@@ -21,9 +21,9 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [openstack_blockstorage_volume_v3.volume_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/resources/blockstorage_volume_v3) | resource |
-| [random_string.random](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
-| [openstack_images_image_v2.image_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/data-sources/images_image_v2) | data source |
+| [openstack_blockstorage_volume_v3.volume_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/blockstorage_volume_v3) | resource |
+| random_string.random | resource |
+| [openstack_images_image_v2.image_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/data-sources/images_image_v2) | data source |
 
 ## Inputs
 
@@ -42,3 +42,4 @@ No modules.
 | <a name="output_image_id"></a> [image\_id](#output\_image\_id) | ID of image used |
 | <a name="output_volume_id"></a> [volume\_id](#output\_volume\_id) | Created volume ID |
 | <a name="output_volume_name"></a> [volume\_name](#output\_volume\_name) | Name of created volume |
+<!-- END_TF_DOCS -->

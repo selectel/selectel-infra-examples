@@ -1,8 +1,8 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
 | <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | >=5.0.2 |
 
 ## Providers
@@ -19,7 +19,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [selectel_mks_nodegroup_v1.nodegroup_1](https://registry.terraform.io/providers/selectel/selectel/latest/docs/resources/mks_nodegroup_v1) | resource |
+| selectel_mks_nodegroup_v1.nodegroup_1 | resource |
 
 ## Inputs
 
@@ -45,3 +45,4 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_nodegroup_id"></a> [nodegroup\_id](#output\_nodegroup\_id) | n/a |
+<!-- END_TF_DOCS -->
