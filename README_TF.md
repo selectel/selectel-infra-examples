@@ -4,14 +4,14 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <= 1.6.2 |
-| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 3.0.0 |
+| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
 | <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | 5.1.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 3.0.0 |
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
 | <a name="provider_selectel"></a> [selectel](#provider\_selectel) | 5.1.1 |
 
 ## Modules
@@ -31,7 +31,7 @@
 
 | Name | Type |
 |------|------|
-| [openstack_networking_floatingip_associate_v2.association_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/networking_floatingip_associate_v2) | resource |
+| openstack_networking_floatingip_associate_v2.association_1 | resource |
 | selectel_mks_kube_versions_v1.versions | data source |
 
 ## Inputs
