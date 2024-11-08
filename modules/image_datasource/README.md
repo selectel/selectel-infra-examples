@@ -3,13 +3,13 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 3.0.0 |
+| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 3.0.0 |
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
 
 ## Modules
 
@@ -19,7 +19,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [openstack_images_image_v2.image_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/data-sources/images_image_v2) | data source |
+| openstack_images_image_v2.image_1 | data source |
 
 ## Inputs
 

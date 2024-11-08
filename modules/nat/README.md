@@ -3,13 +3,13 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 3.0.0 |
+| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 3.0.0 |
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
 
 ## Modules
 
@@ -19,11 +19,11 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [openstack_networking_network_v2.network_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/networking_network_v2) | resource |
-| [openstack_networking_router_interface_v2.router_interface_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/networking_router_interface_v2) | resource |
-| [openstack_networking_router_v2.router_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/networking_router_v2) | resource |
-| [openstack_networking_subnet_v2.subnet_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/resources/networking_subnet_v2) | resource |
-| [openstack_networking_network_v2.external_net](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/3.0.0/docs/data-sources/networking_network_v2) | data source |
+| openstack_networking_network_v2.network_1 | resource |
+| openstack_networking_router_interface_v2.router_interface_1 | resource |
+| openstack_networking_router_v2.router_1 | resource |
+| openstack_networking_subnet_v2.subnet_1 | resource |
+| openstack_networking_network_v2.external_net | data source |
 
 ## Inputs
 
