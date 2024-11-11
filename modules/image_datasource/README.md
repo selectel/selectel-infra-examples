@@ -1,8 +1,8 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
 | <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
 
 ## Providers
@@ -19,7 +19,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [openstack_images_image_v2.image_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/data-sources/images_image_v2) | data source |
+| openstack_images_image_v2.image_1 | data source |
 
 ## Inputs
 
@@ -34,3 +34,4 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_image_id"></a> [image\_id](#output\_image\_id) | ID созданного image |
+<!-- END_TF_DOCS -->

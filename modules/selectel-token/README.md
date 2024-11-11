@@ -1,8 +1,8 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_http-full"></a> [http-full](#requirement\_http-full) | >= 1.3.1 |
 
 ## Providers
@@ -19,8 +19,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [http-full_http.accout-token](https://registry.terraform.io/providers/salrashid123/http-full/latest/docs/data-sources/http) | data source |
-| [http-full_http.project-token](https://registry.terraform.io/providers/salrashid123/http-full/latest/docs/data-sources/http) | data source |
+| http-full_http.accout-token | data source |
+| http-full_http.project-token | data source |
 
 ## Inputs
 
@@ -38,3 +38,4 @@ No modules.
 |------|-------------|
 | <a name="output_account_token"></a> [account\_token](#output\_account\_token) | n/a |
 | <a name="output_project_token"></a> [project\_token](#output\_project\_token) | n/a |
+<!-- END_TF_DOCS -->

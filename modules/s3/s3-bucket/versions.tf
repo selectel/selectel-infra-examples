@@ -8,7 +8,6 @@ terraform {
       source  = "registry.terraform.io/salrashid123/http-full"
       version = ">= 1.3.1"
     }
-
     terracurl = {
       source  = "registry.terraform.io/devops-rob/terracurl"
       version = ">= 1.0.1"

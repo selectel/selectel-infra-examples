@@ -8,13 +8,15 @@ jobs:
     name: 'Manual Destroy'
     runs-on: self-hosted
     env:
+      terraform_link: ${{ secrets.TERRAFORM_BINARY }}
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+      TF_VAR_flavor_name: ${{ secrets.FLAVOR_NAME }}
 
     steps:
     - name: Checkout the repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup NodeJS v20
       uses: actions/setup-node@v4
@@ -22,9 +24,24 @@ jobs:
         node-version: 20
 
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3.0.0
-      with:
-        terraform_version: "1.5.7"
+      shell: bash
+      run: |
+        curl -o terraform.zip $terraform_link
+        unzip terraform.zip
+        rm terraform.zip
+        chmod 755 terraform
+        mv terraform /usr/local/bin
+
+    - name: Add .terraformrc
+      shell: bash
+      run: |
+        cat <<EOS >> $HOME/.terraformrc
+        provider_installation {
+            network_mirror {
+              url = "https://tf-proxy.selectel.ru/mirror/v1/"
+            }
+        }
+        EOS
 
     - name: Init Terraform
       run: >

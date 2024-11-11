@@ -1,8 +1,8 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
 | <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
 
 ## Providers
@@ -19,7 +19,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [openstack_compute_keypair_v2.keypair_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/resources/compute_keypair_v2) | resource |
+| openstack_compute_keypair_v2.keypair_1 | resource |
 
 ## Inputs
 
@@ -35,3 +35,4 @@ No modules.
 |------|-------------|
 | <a name="output_keypair_id"></a> [keypair\_id](#output\_keypair\_id) | ID созданной KeyPair |
 | <a name="output_keypair_name"></a> [keypair\_name](#output\_keypair\_name) | Имя созданной KeyPair |
+<!-- END_TF_DOCS -->

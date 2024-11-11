@@ -1,8 +1,8 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
 | <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
 
 ## Providers
@@ -19,8 +19,8 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [openstack_networking_network_v2.network_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/resources/networking_network_v2) | resource |
-| [openstack_networking_subnet_v2.subnet_1](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/resources/networking_subnet_v2) | resource |
+| openstack_networking_network_v2.network_1 | resource |
+| openstack_networking_subnet_v2.subnet_1 | resource |
 
 ## Inputs
 
@@ -37,3 +37,4 @@ No modules.
 |------|-------------|
 | <a name="output_network_id"></a> [network\_id](#output\_network\_id) | n/a |
 | <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | n/a |
+<!-- END_TF_DOCS -->

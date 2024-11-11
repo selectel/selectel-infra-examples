@@ -20,3 +20,10 @@ variable "os_auth_url" {
   default     = "https://cloud.api.selcloud.ru/identity/v3"
   description = "URL до openstack api"
 }
+
+# vm vars
+
+variable "flavor_name" {
+  type        = string
+  description = "Название флавора"
+}

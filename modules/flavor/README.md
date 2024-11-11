@@ -1,8 +1,8 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
 | <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
 
 ## Providers
@@ -19,7 +19,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [openstack_compute_flavor_v2.flavor](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/1.53.0/docs/resources/compute_flavor_v2) | resource |
+| openstack_compute_flavor_v2.flavor | resource |
 
 ## Inputs
 
@@ -37,3 +37,4 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_flavor_id"></a> [flavor\_id](#output\_flavor\_id) | n/a |
+<!-- END_TF_DOCS -->
