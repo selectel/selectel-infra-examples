@@ -1,4 +1,4 @@
-name: 'Test Opentofu Selectel Terraform modules'
+name: 'Modules Test Run - OpenTofu Latest'
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   setup:
-    name: 'Test Opentofu Selectel Terraform modules'
+    name: 'Modules Test Run - OpenTofu Latest'
     runs-on: self-hosted
     env:
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
@@ -22,8 +22,6 @@ jobs:
 
     - name: Setup OpenTofu
       uses: opentofu/setup-opentofu@v1
-      with:
-        tofu_version: 1.6.2
 
     - name: Add .tofurc
       shell: bash
