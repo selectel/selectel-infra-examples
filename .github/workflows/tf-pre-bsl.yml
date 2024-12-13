@@ -1,16 +1,16 @@
-name: 'Modules Test Run - Terraform v1.10.2'
+name: 'Modules Test Run - Terraform Pre-BSL'
 
 on:
   schedule:
-    - cron: '0 8 * * 1' # run every Monday at 11:00 MSK
+    - cron: '0 8 * * 3' # run every Wednesday at 11:00 MSK
   workflow_dispatch:
         
 jobs:
   setup:
-    name: 'Modules Test Run - Terraform v1.10.2'
+    name: 'Modules Test Run - Terraform Pre-BSL'
     runs-on: self-hosted
     env:
-      terraform_link: ${{ secrets.TERRAFORM_BINARY_LATEST }}
+      terraform_link: ${{ secrets.TERRAFORM_BINARY_PREBSL }}
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
