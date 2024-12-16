@@ -10,6 +10,9 @@ resource "selectel_mks_nodegroup_v1" "nodegroup_1" {
   volume_type       = var.volume_type
   labels            = var.labels
   flavor_id         = var.flavor_id
+
+  install_nvidia_device_plugin = true
+
   dynamic "taints" {
     for_each = var.taints[*]
     content {
