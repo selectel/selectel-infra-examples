@@ -22,7 +22,6 @@ variable "os_auth_url" {
 }
 
 # vm vars
-
 variable "flavor_name" {
   type        = string
   description = "Название флавора"
