@@ -62,7 +62,6 @@ jobs:
       run: >
         terraform init -reconfigure
         -backend-config="bucket=github-terraform-state"
-        -backend-config="endpoint=s3.ru-1.storage.selcloud.ru"
         -backend-config="key=github-infra-examples.tfstate"
         -backend-config="region=ru-1"
         -backend-config="skip_region_validation=true"
@@ -75,18 +74,3 @@ jobs:
 
     - name: Terraform destroy
       run: terraform destroy -auto-approve
-
-    - name: Telegram notify if job was failed
-      if: ${{ failure() }}
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: |
-          -= GITHUB public repository selectel/selectel-infra-examples =-
-          Terraform modules build pipeline was failed
-          🚨 Critical
-          Не катится пайпа, необходимо принять меры, возможно внутренние пайпы с terraform так же не будут катиться.
-
-          ⚡️Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          🔥 See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}

@@ -9,5 +9,9 @@ terraform {
       version = "3.0.0"
     }
   }
-  backend "s3" {}
+  backend "s3" {
+    endpoints = {
+      s3 = "s3.ru-1.storage.selcloud.ru"
+    }
+  }
 }
