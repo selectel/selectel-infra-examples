@@ -2,7 +2,7 @@ name: 'Modules Test Run - Terraform v1.10.2'
 
 on:
   schedule:
-    - cron: '0 8 * * 1' # run every Monday at 11:00 MSK
+    - cron: '0 8 * * 2' # run every Tuesday at 11:00 MSK
   workflow_dispatch:
         
 jobs:
@@ -10,7 +10,7 @@ jobs:
     name: 'Modules Test Run - Terraform v1.10.2'
     runs-on: self-hosted
     env:
-      terraform_link: ${{ secrets.TERRAFORM_BINARY_LATEST }}
+      terraform_link: ${{ secrets.TERRAFORM_BINARY }}
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
@@ -27,13 +27,16 @@ jobs:
         node-version: 20
 
     - name: Setup Terraform
-      shell: bash
-      run: |
-        curl -o terraform.zip $terraform_link
-        unzip terraform.zip
-        rm terraform.zip
-        chmod 755 terraform
-        mv terraform /usr/local/bin
+      uses: hashicorp/setup-terraform@v3
+
+#    - name: Setup Terraform
+#      shell: bash
+#      run: |
+#        curl -o terraform.zip $terraform_link
+#        unzip terraform.zip
+#        rm terraform.zip
+#        chmod 755 terraform
+#        mv terraform /usr/local/bin
 
 #    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
 #      uses: bridgecrewio/checkov-action@v12
@@ -72,17 +75,14 @@ jobs:
     - name: Terraform destroy
       run: terraform destroy -auto-approve
 
-#    - name: Telegram notify if job was failed
-#      if: ${{ failure() }}
-#      uses: appleboy/telegram-action@master
-#      with:
-#        to: ${{ secrets.TELEGRAM_TO }}
-#        token: ${{ secrets.TELEGRAM_TOKEN }}
-#        message: |
-#          -= GITHUB public repository selectel/selectel-infra-examples =-
-#          Terraform modules build pipeline was failed
-#          🚨 Critical
-#          Не катится пайпа, необходимо принять меры, возможно внутренние пайпы с terraform так же не будут катиться.
-#
-#          ⚡️Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-#          🔥 See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+    - name: Telegram notify if job was failed
+      if: ${{ (failure()) && (github.ref == 'refs/heads/main') }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          ⚙️ *GitHub repository selectel/selectel-infra-examples*
+          
+          🔥 *Pipeline has failed*
+          ➡️ *Workflow:* https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
