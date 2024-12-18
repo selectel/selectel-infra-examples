@@ -55,6 +55,10 @@ jobs:
         }
         EOS
 
+    - name: debug
+      shell: bash
+      run: cat $HOME/.terraformrc
+
     - name: Lint Terraform
       run: terraform fmt -diff -check -recursive
 
