@@ -1,10 +1,9 @@
 # Selectel Terraform Modules Example
 
-| Description       | Pipeline Status                                                                                                                                                                             | Version                                                                                                                            |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| Terraform v1.10.2 | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml)       | [![version](https://img.shields.io/badge/Terraform-1.10.2-green.svg)](https://github.com/hashicorp/terraform/releases/tag/v1.10.2) |
-| Terraform Pre-BSL | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/tf-pre-bsl.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/tf-pre-bsl.yml) | [![version](https://img.shields.io/badge/Terraform-1.5.7-green.svg)](https://github.com/hashicorp/terraform/releases/tag/v1.5.7)   |
-| OpenTofu Latest   | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml)     | [![version](https://img.shields.io/badge/OpenTofu-Latest-green.svg)](https://github.com/opentofu/opentofu/releases/latest)         |
+|                   | Pipeline Status                                                                                                                                                                         | Version                                                                                                                            |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| Terraform v1.10.3 | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml)   | [![version](https://img.shields.io/badge/Terraform-1.10.3-green.svg)](https://github.com/hashicorp/terraform/releases/tag/v1.10.3) |
+| OpenTofu Latest   | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml) | [![version](https://img.shields.io/badge/OpenTofu-Latest-green.svg)](https://github.com/opentofu/opentofu/releases/latest)         |
 
 - [Selectel Terraform Modules Example](#selectel-terraform-modules-example)
   - [Использование](#использование)
@@ -15,7 +14,7 @@
   - [Структура репозитория](#структура-репозитория)
     - [Modules](#modules)
 
-В [данном репозитории](https://github.com/selectel/selectel-infra-examples) находятся примеры Terraform модулей, используемых для создания инфраструктуры в облаке Selectel.  Также в репозитории еженедельно запускаются пайплайны с тестовым созданием ресурсов с помощью **Terraform** и **OpenTofu**.
+В [данном репозитории](https://github.com/selectel/selectel-infra-examples) находятся примеры Terraform модулей, используемых для создания инфраструктуры в облаке Selectel. Также в репозитории еженедельно запускаются пайплайны с тестовым созданием ресурсов с помощью **Terraform** и **OpenTofu**.
 
 **P.S.** Если вы не нашли пример для создания определенного ресурса - можете оставить issue и мы примем во внимание необходимость его добавления.
 
@@ -23,11 +22,9 @@
 
 ## Использование
 
-> Далее все команды terraform-cli могут быть заменены на tofu. Будут работать оба варианта.
+> Все последующие команды terraform-cli могут быть заменены на opentofu.
 > 
-> Перед использованием **проверьте версию Terraform/OpenTofu**, данный репозиторий гарантирует запуск Terraform кода только на определенной версии Terraform/OpenTofu - [см. в шапке README](#selectel-terraform-modules-example). Версия Terraform 1.5.5 обусловлена переходом начиная с версии 1.6 на лицензию BSL.
-> 
-> Также убедитесь, что в вашем env нет лишних переменных вида "OS_*", их наличие повлияет на провайдер Openstack.
+> Убедитесь, что в вашем env нет лишних переменных вида "OS_*", их наличие повлияет на провайдер Openstack.
 
 ### 1. .terraformrc/.tofurc
 
@@ -53,41 +50,26 @@ terraform {
 }
 ```
 
-<details>
-<summary>Пример передачи `backend` для хранения стейта в S3 через CLI:</summary>
-
-```bash
-terraform init \
-  -backend-config="bucket=< имя бакета s3 >" \
-  -backend-config="endpoint=s3.ru-1.storage.selcloud.ru" \
-  -backend-config="key=< имя стейт-файла >.tfstate" \
-  -backend-config="region=ru-1" \
-  -backend-config="skip_region_validation=true" \
-  -backend-config="skip_credentials_validation=true" \
-  -backend-config="access_key=< S3_ACCESS_KEY >" \
-  -backend-config="secret_key=< secrets.S3_SECRET_KEY >"
-```
-</details>
-
-<details>
-<summary>Через tf файл:</summary>
+Пример передачи `backend` для хранения стейта в S3:
 
 ```terraform
 terraform {
   backend "s3" {
-    bucket     = "< имя бакета s3 >"
-    endpoint   = "s3.ru-1.storage.selcloud.ru"
-    key        = "< имя стейт-файла >.tfstate"
+    bucket     = "<название бакета s3>"
+    key        = "<название стейт-файла>.tfstate"
+    access_key = "<access_key>"
+    secret_key = "<secret_key>"
+    endpoints  = { s3 = "https://s3.ru-1.storage.selcloud.ru" }
     region     = "ru-1"
-    access_key = "< S3_ACCESS_KEY >"
-    secret_key = "< secrets.S3_SECRET_KEY >"
-
+    
     skip_region_validation      = true
     skip_credentials_validation = true
+    skip_requesting_account_id  = true
+    skip_s3_checksum            = true
+    skip_metadata_api_check     = true
   }
 }
 ```
-</details>
 
 ### 3. Init
 

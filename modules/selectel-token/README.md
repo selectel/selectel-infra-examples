@@ -3,13 +3,13 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_http-full"></a> [http-full](#requirement\_http-full) | >= 1.3.1 |
+| <a name="requirement_http-full"></a> [http-full](#requirement\_http-full) | ~> 1.3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_http-full"></a> [http-full](#provider\_http-full) | >= 1.3.1 |
+| <a name="provider_http-full"></a> [http-full](#provider\_http-full) | ~> 1.3.0 |
 
 ## Modules
 

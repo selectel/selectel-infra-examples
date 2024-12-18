@@ -2,6 +2,8 @@ provider "selectel" {
   domain_name = var.selectel_domain_name
   username    = var.selectel_user_admin_user
   password    = var.selectel_user_admin_password
+  auth_url    = var.os_auth_url
+  auth_region = "ru-9"
 }
 
 provider "openstack" {

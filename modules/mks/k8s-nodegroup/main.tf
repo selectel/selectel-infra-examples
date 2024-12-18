@@ -10,6 +10,8 @@ resource "selectel_mks_nodegroup_v1" "nodegroup_1" {
   volume_type       = var.volume_type
   labels            = var.labels
 
+  install_nvidia_device_plugin = false
+
   cpus      = var.cpus != "" && var.flavor_id == "" ? var.cpus : null
   ram_mb    = var.ram_mb != "" && var.flavor_id == "" ? var.ram_mb : null
   flavor_id = var.flavor_id != "" && var.ram_mb == "" && var.cpus == "" ? var.flavor_id : null
