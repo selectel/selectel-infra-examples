@@ -1,4 +1,4 @@
-name: 'Modules Test Run - Terraform v1.10.2'
+name: 'Modules Test Run - Terraform v1.10.3'
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
         
 jobs:
   setup:
-    name: 'Modules Test Run - Terraform v1.10.2'
+    name: 'Modules Test Run - Terraform v1.10.3'
     runs-on: self-hosted
     env:
       terraform_link: ${{ secrets.TERRAFORM_BINARY }}
