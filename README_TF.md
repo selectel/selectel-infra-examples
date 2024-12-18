@@ -37,7 +37,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_flavor_name"></a> [flavor\_name](#input\_flavor\_name) | Название флавора | `string` | n/a | yes |
+| <a name="input_flavor_name"></a> [flavor\_name](#input\_flavor\_name) | Название флавора | `string` | `"1013"` | no |
 | <a name="input_os_auth_url"></a> [os\_auth\_url](#input\_os\_auth\_url) | URL до openstack api | `string` | `"https://cloud.api.selcloud.ru/identity/v3"` | no |
 | <a name="input_selectel_domain_name"></a> [selectel\_domain\_name](#input\_selectel\_domain\_name) | ID Selectel аккаунта | `string` | n/a | yes |
 | <a name="input_selectel_user_admin_password"></a> [selectel\_user\_admin\_password](#input\_selectel\_user\_admin\_password) | Пароль от сервисного пользователя | `string` | n/a | yes |

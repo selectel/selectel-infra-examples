@@ -3,15 +3,15 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.3.2 |
-| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | >= 5.0.2 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6.0 |
+| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | ~> 6.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_random"></a> [random](#provider\_random) | >= 3.3.2 |
-| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | >= 5.0.2 |
+| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.6.0 |
+| <a name="provider_selectel"></a> [selectel](#provider\_selectel) | ~> 6.0.0 |
 
 ## Modules
 
