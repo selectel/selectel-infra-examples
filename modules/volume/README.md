@@ -3,14 +3,14 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
+| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | ~> 3.0.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.3.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | ~> 3.0.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | >= 3.3.2 |
 
 ## Modules

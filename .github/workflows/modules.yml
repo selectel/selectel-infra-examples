@@ -27,16 +27,13 @@ jobs:
         node-version: 20
 
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-
-#    - name: Setup Terraform
-#      shell: bash
-#      run: |
-#        curl -o terraform.zip $terraform_link
-#        unzip terraform.zip
-#        rm terraform.zip
-#        chmod 755 terraform
-#        mv terraform /usr/local/bin
+      shell: bash
+      run: |
+        curl -o terraform.zip $terraform_link
+        unzip terraform.zip
+        rm terraform.zip
+        chmod 755 terraform
+        mv terraform /usr/local/bin
 
 #    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
 #      uses: bridgecrewio/checkov-action@v12
@@ -75,7 +72,7 @@ jobs:
     - name: Terraform destroy
       run: terraform destroy -auto-approve
 
-    - name: Telegram notify if job was failed
+    - name: Telegram notify if failed on main branch
       if: ${{ (failure()) && (github.ref == 'refs/heads/main') }}
       uses: appleboy/telegram-action@master
       with:

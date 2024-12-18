@@ -1,9 +1,9 @@
 # Selectel Terraform Modules Example
 
-| Description       | Pipeline Status                                                                                                                                                                             | Version                                                                                                                            |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| Terraform v1.10.2 | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml)       | [![version](https://img.shields.io/badge/Terraform-1.10.2-green.svg)](https://github.com/hashicorp/terraform/releases/tag/v1.10.2) |
-| OpenTofu Latest   | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml)     | [![version](https://img.shields.io/badge/OpenTofu-Latest-green.svg)](https://github.com/opentofu/opentofu/releases/latest)         |
+|                   | Pipeline Status                                                                                                                                                                         | Version                                                                                                                            |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| Terraform v1.10.2 | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml)   | [![version](https://img.shields.io/badge/Terraform-1.10.2-green.svg)](https://github.com/hashicorp/terraform/releases/tag/v1.10.2) |
+| OpenTofu          | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml) | [![version](https://img.shields.io/badge/OpenTofu-Latest-green.svg)](https://github.com/opentofu/opentofu/releases/latest)         |
 
 - [Selectel Terraform Modules Example](#selectel-terraform-modules-example)
   - [Использование](#использование)
@@ -52,41 +52,26 @@ terraform {
 }
 ```
 
-<details>
-<summary>Пример передачи `backend` для хранения стейта в S3 через CLI:</summary>
-
-```bash
-terraform init \
-  -backend-config="bucket=< имя бакета s3 >" \
-  -backend-config="endpoint=s3.ru-1.storage.selcloud.ru" \
-  -backend-config="key=< имя стейт-файла >.tfstate" \
-  -backend-config="region=ru-1" \
-  -backend-config="skip_region_validation=true" \
-  -backend-config="skip_credentials_validation=true" \
-  -backend-config="access_key=< S3_ACCESS_KEY >" \
-  -backend-config="secret_key=< secrets.S3_SECRET_KEY >"
-```
-</details>
-
-<details>
-<summary>Через tf файл:</summary>
+Пример передачи `backend` для хранения стейта в S3:
 
 ```terraform
 terraform {
   backend "s3" {
-    bucket     = "< имя бакета s3 >"
-    endpoint   = "s3.ru-1.storage.selcloud.ru"
-    key        = "< имя стейт-файла >.tfstate"
+    bucket     = "<название бакета s3>"
+    key        = "<название стейт-файла>.tfstate"
+    access_key = "<access_key>"
+    secret_key = "<secret_key>"
+    endpoints  = { s3 = "https://s3.ru-1.storage.selcloud.ru" }
     region     = "ru-1"
-    access_key = "< S3_ACCESS_KEY >"
-    secret_key = "< secrets.S3_SECRET_KEY >"
-
+    
     skip_region_validation      = true
     skip_credentials_validation = true
+    skip_requesting_account_id  = true
+    skip_s3_checksum            = true
+    skip_metadata_api_check     = true
   }
 }
 ```
-</details>
 
 ### 3. Init
 

@@ -24,5 +24,6 @@ variable "os_auth_url" {
 # vm vars
 variable "flavor_name" {
   type        = string
+  default     = "1013"
   description = "Название флавора"
 }
