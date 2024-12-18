@@ -3,7 +3,7 @@
 |                   | Pipeline Status                                                                                                                                                                         | Version                                                                                                                            |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
 | Terraform v1.10.2 | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml)   | [![version](https://img.shields.io/badge/Terraform-1.10.2-green.svg)](https://github.com/hashicorp/terraform/releases/tag/v1.10.2) |
-| OpenTofu          | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml) | [![version](https://img.shields.io/badge/OpenTofu-Latest-green.svg)](https://github.com/opentofu/opentofu/releases/latest)         |
+| OpenTofu Latest   | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml) | [![version](https://img.shields.io/badge/OpenTofu-Latest-green.svg)](https://github.com/opentofu/opentofu/releases/latest)         |
 
 - [Selectel Terraform Modules Example](#selectel-terraform-modules-example)
   - [Использование](#использование)
@@ -14,7 +14,7 @@
   - [Структура репозитория](#структура-репозитория)
     - [Modules](#modules)
 
-В [данном репозитории](https://github.com/selectel/selectel-infra-examples) находятся примеры Terraform модулей, используемых для создания инфраструктуры в облаке Selectel.  Также в репозитории еженедельно запускаются пайплайны с тестовым созданием ресурсов с помощью **Terraform** и **OpenTofu**.
+В [данном репозитории](https://github.com/selectel/selectel-infra-examples) находятся примеры Terraform модулей, используемых для создания инфраструктуры в облаке Selectel. Также в репозитории еженедельно запускаются пайплайны с тестовым созданием ресурсов с помощью **Terraform** и **OpenTofu**.
 
 **P.S.** Если вы не нашли пример для создания определенного ресурса - можете оставить issue и мы примем во внимание необходимость его добавления.
 
@@ -22,11 +22,9 @@
 
 ## Использование
 
-> Далее все команды terraform-cli могут быть заменены на tofu. Будут работать оба варианта.
+> Все последующие команды terraform-cli могут быть заменены на opentofu.
 > 
-> Перед использованием **проверьте версию Terraform/OpenTofu**, данный репозиторий гарантирует запуск Terraform кода только на определенной версии Terraform/OpenTofu - [см. в шапке README](#selectel-terraform-modules-example). Версия Terraform 1.5.5 обусловлена переходом начиная с версии 1.6 на лицензию BSL.
-> 
-> Также убедитесь, что в вашем env нет лишних переменных вида "OS_*", их наличие повлияет на провайдер Openstack.
+> Убедитесь, что в вашем env нет лишних переменных вида "OS_*", их наличие повлияет на провайдер Openstack.
 
 ### 1. .terraformrc/.tofurc
 
