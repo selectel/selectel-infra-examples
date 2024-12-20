@@ -3,16 +3,16 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_http-full"></a> [http-full](#requirement\_http-full) | >= 1.3.1 |
-| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | 1.53.0 |
-| <a name="requirement_terracurl"></a> [terracurl](#requirement\_terracurl) | >= 1.0.1 |
+| <a name="requirement_http-full"></a> [http-full](#requirement\_http-full) | ~> 1.3.0 |
+| <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | ~> 3.0.0 |
+| <a name="requirement_terracurl"></a> [terracurl](#requirement\_terracurl) | ~> 1.2.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | 1.53.0 |
-| <a name="provider_terracurl"></a> [terracurl](#provider\_terracurl) | >= 1.0.1 |
+| <a name="provider_openstack"></a> [openstack](#provider\_openstack) | ~> 3.0.0 |
+| <a name="provider_terracurl"></a> [terracurl](#provider\_terracurl) | ~> 1.2.0 |
 
 ## Modules
 

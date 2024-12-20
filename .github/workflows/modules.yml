@@ -1,16 +1,16 @@
-name: 'Modules Test Run - Terraform v1.10.2'
+name: 'Modules Test Run - Terraform v1.10.3'
 
 on:
   schedule:
-    - cron: '0 8 * * 1' # run every Monday at 11:00 MSK
+    - cron: '0 8 * * 2' # run every Tuesday at 11:00 MSK
   workflow_dispatch:
         
 jobs:
   setup:
-    name: 'Modules Test Run - Terraform v1.10.2'
+    name: 'Modules Test Run - Terraform v1.10.3'
     runs-on: self-hosted
     env:
-      terraform_link: ${{ secrets.TERRAFORM_BINARY_LATEST }}
+      terraform_link: ${{ secrets.TERRAFORM_BINARY }}
       TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
       TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
       TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
@@ -62,11 +62,7 @@ jobs:
       run: >
         terraform init -reconfigure
         -backend-config="bucket=github-terraform-state"
-        -backend-config="endpoint=s3.ru-1.storage.selcloud.ru"
         -backend-config="key=github-infra-examples.tfstate"
-        -backend-config="region=ru-1"
-        -backend-config="skip_region_validation=true"
-        -backend-config="skip_credentials_validation=true"
         -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
         -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
 
@@ -76,17 +72,14 @@ jobs:
     - name: Terraform destroy
       run: terraform destroy -auto-approve
 
-    - name: Telegram notify if job was failed
-      if: ${{ failure() }}
+    - name: Telegram notify if failed on main branch
+      if: ${{ (failure()) && (github.ref == 'refs/heads/main') }}
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          -= GITHUB public repository selectel/selectel-infra-examples =-
-          Terraform modules build pipeline was failed
-          🚨 Critical
-          Не катится пайпа, необходимо принять меры, возможно внутренние пайпы с terraform так же не будут катиться.
-
-          ⚡️Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          🔥 See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+          ⚙️ *GitHub repository selectel/selectel-infra-examples*
+          
+          🔥 *Pipeline has failed*
+          ➡️ *Workflow:* https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
