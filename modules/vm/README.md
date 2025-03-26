@@ -2,9 +2,9 @@
 ## Requirements
 
 | Name | Version |
-|------|---------|
+|------|--------|
 | <a name="requirement_openstack"></a> [openstack](#requirement\_openstack) | ~> 3.0.0 |
-| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | ~> 6.0.0 |
+| <a name="requirement_selectel"></a> [selectel](#requirement\_selectel) | ~> 6.0 |
 
 ## Providers
 
