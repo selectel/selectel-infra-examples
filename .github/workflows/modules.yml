@@ -34,7 +34,7 @@ jobs:
     - name: Install Terraform latest
       shell: bash
       run: |
-        tfswitch --latest --mirror https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform
+        tfswitch -s 1.0 --mirror https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform
 
     - name: Add .terraformrc
       shell: bash
