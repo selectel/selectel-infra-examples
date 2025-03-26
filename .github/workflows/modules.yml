@@ -23,17 +23,14 @@ jobs:
     - name: Checkout the repo
       uses: actions/checkout@v4
 
-#    - name: Setup NodeJS v20
-#      uses: actions/setup-node@v4
-#      with:
-#        node-version: 20
-
     - name: Setup tfswitch
       uses: stv-io/action-tfswitch@v1.0.2
 
     - name: Install Terraform latest
       shell: bash
       run: |
+      # use -s 1.0 instead of --latest since apparently tfswitch relies on dirs creation date
+      # which is inconsistent for the selectel mirror. --latest gives v0.1.0 while -s 1.0 give latest ¯\_(ツ)_/¯
         tfswitch -s 1.0 --mirror https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform
 
     - name: Add .terraformrc

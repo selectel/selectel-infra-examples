@@ -22,13 +22,15 @@ module "sfs" {
 
 # S3 нет в провайдере Selectel, поэтому под капотом terracurl
 
-# Создаём S3-ключ для пользователя
-module "s3-creds" {
-  source           = "./modules/s3/s3-credentials"
-  os_user_id       = var.selectel_user_id
-  os_project_id    = var.selectel_project_id
-  credentials_name = "github-s3-creds"
-}
+# Сервисный пользователь не может выписывать сам на себя S3-ключи,
+# поэтому остаётся только ручное создание через панель.
+# More info: https://docs.selectel.ru/cloud/object-storage/manage/manage-access/#issue-s3-key
+# module "s3-creds" {
+#   source           = "./modules/s3/s3-credentials"
+#   os_user_id       = var.selectel_user_id
+#   os_project_id    = var.selectel_project_id
+#   credentials_name = "github-s3-creds"
+# }
 
 # Создаём S3-bucket
 module "s3-bucket" {
