@@ -10,9 +10,12 @@ jobs:
     name: 'Modules Test Run - OpenTofu Latest'
     runs-on: self-hosted
     env:
-      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
-      TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
-      TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_DOMAIN_NAME }}
+      TF_VAR_selectel_user_name: ${{ secrets.SELECTEL_USER_NAME }}
+      TF_VAR_selectel_user_id: ${{ secrets.SELECTEL_USER_ID }}
+      TF_VAR_selectel_user_password: ${{ secrets.SELECTEL_USER_PASSWORD }}
+      TF_VAR_selectel_project_name: ${{ secrets.SELECTEL_PROJECT_NAME }}
+      TF_VAR_selectel_project_id: ${{ secrets.SELECTEL_PROJECT_ID }}
       TF_VAR_flavor_name: ${{ secrets.FLAVOR_NAME }}
     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'schedule' }}
 
@@ -50,3 +53,16 @@ jobs:
 
     - name: OpenTofu destroy
       run: tofu destroy -auto-approve
+
+    - name: Send Telegram alert if failed on the main branch
+      if: ${{ (failure()) && (github.ref == 'refs/heads/main') }}
+      uses: cbrgm/telegram-github-action@v1
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        thread-id: 168
+        message: |
+          ⚙️ GitHub repository selectel/selectel-infra-examples
+
+          🔥 OpenTofu pipeline has failed!
+          ➡️ Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}

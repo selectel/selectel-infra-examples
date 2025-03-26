@@ -1,9 +1,9 @@
 # Selectel Terraform Modules Example
 
-|                   | Pipeline Status                                                                                                                                                                         | Version                                                                                                                            |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| Terraform v1.10.3 | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml)   | [![version](https://img.shields.io/badge/Terraform-1.10.3-green.svg)](https://github.com/hashicorp/terraform/releases/tag/v1.10.3) |
-| OpenTofu Latest   | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml) | [![version](https://img.shields.io/badge/OpenTofu-Latest-green.svg)](https://github.com/opentofu/opentofu/releases/latest)         |
+|                   | Pipeline Status                                                                                                                                                                         | Version                                                                                                                       |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Terraform Latest | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/modules.yml)   | [![version](https://img.shields.io/badge/Terraform-Latest-green.svg)](https://github.com/hashicorp/terraform/releases/latest) |
+| OpenTofu Latest   | [![](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml/badge.svg)](https://github.com/selectel/selectel-infra-examples/actions/workflows/opentofu.yml) | [![version](https://img.shields.io/badge/OpenTofu-Latest-green.svg)](https://github.com/opentofu/opentofu/releases/latest)    |
 
 - [Selectel Terraform Modules Example](#selectel-terraform-modules-example)
   - [Использование](#использование)
@@ -14,11 +14,15 @@
   - [Структура репозитория](#структура-репозитория)
     - [Modules](#modules)
 
-В [данном репозитории](https://github.com/selectel/selectel-infra-examples) находятся примеры Terraform модулей, используемых для создания инфраструктуры в облаке Selectel. Также в репозитории еженедельно запускаются пайплайны с тестовым созданием ресурсов с помощью **Terraform** и **OpenTofu**.
+В [данном репозитории](https://github.com/selectel/selectel-infra-examples) находятся примеры Terraform модулей, используемых для создания инфраструктуры в 
+облаке Selectel. Также в репозитории еженедельно запускаются пайплайны с тестовым созданием ресурсов с помощью 
+**Terraform** и **OpenTofu**.
 
-**P.S.** Если вы не нашли пример для создания определенного ресурса - можете оставить issue и мы примем во внимание необходимость его добавления.
+**P.S.** Если вы не нашли пример для создания определенного ресурса - можете оставить issue и мы примем во 
+внимание необходимость его добавления.
 
-Перед началом работы с облачными ресурсами Selectel через Terraform/OpenTofu рекомендуем ознакомиться с [документацией по провайдеру Selectel/OpenStack](https://docs.selectel.ru/terraform/).
+Перед началом работы с облачными ресурсами Selectel через Terraform/OpenTofu рекомендуем ознакомиться с 
+[документацией по провайдеру Selectel/OpenStack](https://docs.selectel.ru/terraform/).
 
 ## Использование
 
@@ -28,7 +32,8 @@
 
 ### 1. .terraformrc/.tofurc
 
-Для доступа к Terraform Registry из РФ можно воспользоваться кеширующим прокси Selectel, для этого отредактируем файл .terraformrc (или .tofurc для OpenTofu):
+Для доступа к Terraform Registry из РФ можно воспользоваться кеширующим прокси Selectel, для этого отредактируем 
+файл .terraformrc (или .tofurc для OpenTofu):
 
 ```bash
 cat <<EOS >> $HOME/.terraformrc
@@ -42,7 +47,8 @@ EOS
 
 ### 2. State File
 
-По умолчанию в репозитории стейт хранится в s3, для локального запуска потребуется изменить поле `backend` на `local` в файле [versions.tf](https://github.com/selectel/selectel-infra-examples/blob/main/versions.tf#L12):
+По умолчанию в репозитории стейт хранится в s3, для локального запуска потребуется изменить поле `backend` на 
+`local` в файле [versions.tf](https://github.com/selectel/selectel-infra-examples/blob/main/versions.tf#L12):
 
 ```terraform
 terraform {
@@ -73,25 +79,10 @@ terraform {
 
 ### 3. Init
 
-Вы можете использовать все модули, которые есть в репозитории или закомментировать лишние, но учтите, что **в первую очередь создается проект с сервисным пользователем**, которые необходимы для провайдера `Openstack`. 
+Для начала работы необходимо создать в Панели Управления проект, в котором будут впоследствии создаваться ресурсы,
+а также сервисного пользователя с ролью Администратор проекта для вышеупомянутого проекта. Далее необходимо 
+отредактировать `main.tf`, оставив в нём необходимые ресурсы, после чего:
 
->Все, что будет создано ресурсами из провайдера `Openstack` должно идти после создания проекта и пользователя! Для этого потребуется добавить `depends_on` к ресурсу:
-> ```terraform
-> depends_on = [ module.project-with-user ]
-> ```
-
-**Опционально:** Создаем файл `main.tf`, где описана необходимая инфраструктура (пример ниже - создание `Simple File Storage`, остальные примеры смотри в папке [modules](https://github.com/selectel/selectel-infra-examples/tree/main/modules)):
-
-```yaml
-module "sfs" {
-  source               = "modules/sfs"
-  os_network_id        = var.nat_network_id
-  os_subnet_id         = var.nat_subnet_id
-  sfs_size             = var.sfs_size
-  sfs_volume_type      = var.sfs_volume_type
-  os_availability_zone = var.os_availability_zone
-}
-```
 
 1. Инициализируем Terraform Backend командой:
 
@@ -113,7 +104,8 @@ terraform apply
 
 ## Пример использования
 
-В репозитории можно найти пример использования модулей. В корне репозитория созданы `*.tf` файлы, которые можно использовать как пример вызова модулей.
+В репозитории можно найти пример использования модулей. В корне репозитория созданы `*.tf` файлы, которые можно 
+использовать как пример вызова модулей.
 
 Для их использования достаточно перейти в корень репозитория и инициализировать Terraform:
 
@@ -121,13 +113,18 @@ terraform apply
 terraform init
 ```
 
-Далее можно скорректировать некоторые параметры в файле `main.tf`, которые передаются в модули, например, объём SFS, имя кластера и другие.
+Далее можно скорректировать некоторые параметры в файле `main.tf`, которые передаются в модули, например, объём 
+SFS, имя кластера и другие.
 
-Затем необходимо задать переменные, в которых будут содержаться данные от аккаунта Selectel, в котором будет развёрнута инфраструктура:
+Затем необходимо задать переменные, в которых будут содержаться данные от аккаунта Selectel, в котором будет 
+развёрнута инфраструктура:
 
-- `selectel_domain_name`, ID аккаунта, например, 123123
-- `selectel_user_admin_user`, сервисный пользователь с нужными правами 
-- `selectel_user_admin_password`, пароль от сервисного пользователя
+- `selectel_domain_name` - ID Selectel-аккаунта;
+- `selectel_project_name` - название проекта;
+- `selectel_project_id` - ID проекта;
+- `selectel_user_name` - имя сервисного пользователя; 
+- `selectel_user_id` - UID сервисного пользователя;
+- `selectel_user_password` - пароль сервисного пользователя.
 
 Переменные можно задать несколькими способами:
 
@@ -135,8 +132,11 @@ terraform init
 
 ```bash
 export TF_VAR_selectel_domain_name=123123
-export TF_VAR_selectel_user_admin_user=foo
-export TF_VAR_selectel_user_admin_password=bar
+export TF_VAR_selectel_project_name=Project
+export TF_VAR_selectel_project_id=abcd1234abcd1234abcd1234abcd1234
+export TF_VAR_selectel_user_name=foo
+export TF_VAR_selectel_user_id=1234abcd1234abcd1234abcd1234abcd
+export TF_VAR_selectel_user_password=bar
 terraform plan/apply
 ```
 - Ввести вместе с командой `terraform plan/apply` с помощью параметра `-var`:
@@ -144,17 +144,21 @@ terraform plan/apply
 ```bash
 terraform plan/apply \
 -var="selectel_domain_name=123123" \
--var="selectel_user_admin_user=foo" \
--var="selectel_user_admin_password=bar"
+-var="selectel_project_name=Project" \
+-var="selectel_project_id=abcd1234abcd1234abcd1234abcd1234" \
+-var="selectel_user_name=foo" \
+-var="selectel_user_id=1234abcd1234abcd1234abcd1234abcd" \
+-var="selectel_user_password=bar"
 ```
 
 - Ввести с клавиатуры, если переменные не были заданы любым другим способом
 
-После успешного выполнения команды `terraform apply` вы должны увидеть в своём аккаунте новый проект, в котором будут запущены все модули (MKS, SFS, vm, CRaaS и др.)
+После успешного выполнения команды `terraform apply` в заданном проекте появятся указанные в `main.tf` ресурсы.
 
 ## Структура репозитория
 
-Репозиторий включает в себя минимально необходимую структуру для запуска Terraform. В директории [modules](https://github.com/selectel/selectel-infra-examples/tree/main/modules) собраны модули для создания различных компонентов в облаке Selectel.
+Репозиторий включает в себя минимально необходимую структуру для запуска Terraform. В директории [modules](https://github.com/selectel/selectel-infra-examples/tree/main/modules) 
+собраны модули для создания различных компонентов в облаке Selectel.
 
 ### Modules
 

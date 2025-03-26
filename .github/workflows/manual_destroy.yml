@@ -8,10 +8,12 @@ jobs:
     name: 'Manual Destroy'
     runs-on: self-hosted
     env:
-      terraform_link: ${{ secrets.TERRAFORM_BINARY }}
-      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
-      TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
-      TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_DOMAIN_NAME }}
+      TF_VAR_selectel_user_name: ${{ secrets.SELECTEL_USER_NAME }}
+      TF_VAR_selectel_user_id: ${{ secrets.SELECTEL_USER_ID }}
+      TF_VAR_selectel_user_password: ${{ secrets.SELECTEL_USER_PASSWORD }}
+      TF_VAR_selectel_project_name: ${{ secrets.SELECTEL_PROJECT_NAME }}
+      TF_VAR_selectel_project_id: ${{ secrets.SELECTEL_PROJECT_ID }}
       TF_VAR_flavor_name: ${{ secrets.FLAVOR_NAME }}
 
     steps:
@@ -23,14 +25,13 @@ jobs:
       with:
         node-version: 20
 
-    - name: Setup Terraform
+    - name: Setup tfswitch
+      uses: stv-io/action-tfswitch@v1
+
+    - name: Install Terraform latest
       shell: bash
       run: |
-        curl -o terraform.zip $terraform_link
-        unzip terraform.zip
-        rm terraform.zip
-        chmod 755 terraform
-        mv terraform /usr/local/bin
+        tfswitch --latest --mirror https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform
 
     - name: Add .terraformrc
       shell: bash
@@ -42,16 +43,6 @@ jobs:
             }
         }
         EOS
-
-    - name: Send test Telegram alert
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: |
-          ⚙️ GitHub repository selectel/selectel-infra-examples
-          
-          🔥 Test Alert
 
     - name: Init Terraform
       run: >

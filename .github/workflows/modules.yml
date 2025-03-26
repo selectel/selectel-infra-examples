@@ -1,4 +1,4 @@
-name: 'Modules Test Run - Terraform v1.10.3'
+name: 'Modules Test Run - Terraform Latest'
 
 on:
   schedule:
@@ -7,13 +7,15 @@ on:
         
 jobs:
   setup:
-    name: 'Modules Test Run - Terraform v1.10.3'
+    name: 'Modules Test Run - Terraform Latest'
     runs-on: self-hosted
     env:
-      terraform_link: ${{ secrets.TERRAFORM_BINARY }}
-      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
-      TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
-      TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_DOMAIN_NAME }}
+      TF_VAR_selectel_user_name: ${{ secrets.SELECTEL_USER_NAME }}
+      TF_VAR_selectel_user_id: ${{ secrets.SELECTEL_USER_ID }}
+      TF_VAR_selectel_user_password: ${{ secrets.SELECTEL_USER_PASSWORD }}
+      TF_VAR_selectel_project_name: ${{ secrets.SELECTEL_PROJECT_NAME }}
+      TF_VAR_selectel_project_id: ${{ secrets.SELECTEL_PROJECT_ID }}
       TF_VAR_flavor_name: ${{ secrets.FLAVOR_NAME }}
     if: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
 
@@ -21,28 +23,18 @@ jobs:
     - name: Checkout the repo
       uses: actions/checkout@v4
 
-    - name: Setup NodeJS v20
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+#    - name: Setup NodeJS v20
+#      uses: actions/setup-node@v4
+#      with:
+#        node-version: 20
 
-    - name: Setup Terraform
+    - name: Setup tfswitch
+      uses: stv-io/action-tfswitch@v1
+
+    - name: Install Terraform latest
       shell: bash
       run: |
-        curl -o terraform.zip $terraform_link
-        unzip terraform.zip
-        rm terraform.zip
-        chmod 755 terraform
-        mv terraform /usr/local/bin
-
-#    - name: Run Checkov action # suppressed for now because it fails to copy a file inside a self-hosted runner
-#      uses: bridgecrewio/checkov-action@v12
-#      with:
-#        quiet: true
-#        directory: .
-#        output_format: cli
-#        framework: terraform,github_actions
-#        container_user: 1000
+        tfswitch --latest --mirror https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform
 
     - name: Add .terraformrc
       shell: bash
@@ -72,14 +64,15 @@ jobs:
     - name: Terraform destroy
       run: terraform destroy -auto-approve
 
-    - name: Telegram notify if failed on main branch
+    - name: Send Telegram alert if failed on the main branch
       if: ${{ (failure()) && (github.ref == 'refs/heads/main') }}
-      uses: appleboy/telegram-action@master
+      uses: cbrgm/telegram-github-action@v1
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
+        thread-id: 168
         message: |
-          ⚙️ *GitHub repository selectel/selectel-infra-examples*
-          
-          🔥 *Pipeline has failed*
-          ➡️ *Workflow:* https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ⚙️ GitHub repository selectel/selectel-infra-examples
+
+          🔥 Terraform pipeline has failed!
+          ➡️ Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
