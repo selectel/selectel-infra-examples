@@ -28,8 +28,6 @@ jobs:
 
     - name: Install Terraform latest
       shell: bash
-      # use -s 1.0 instead of --latest since apparently tfswitch relies on dirs creation date
-      # which is inconsistent for the selectel mirror. --latest gives v0.1.0 while -s 1.0 give latest
       run: |
         tfswitch -s 1.0 --mirror https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform
 
