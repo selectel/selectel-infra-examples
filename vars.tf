@@ -4,14 +4,30 @@ variable "selectel_domain_name" {
   description = "ID Selectel аккаунта"
 }
 
-variable "selectel_user_admin_user" {
+variable "selectel_user_name" {
   type        = string
-  description = "Имя сервисного пользователя, необходимо создать через панель my.selectel"
+  description = "Имя сервисного пользователя"
 }
 
-variable "selectel_user_admin_password" {
+variable "selectel_user_id" {
   type        = string
-  description = "Пароль от сервисного пользователя"
+  description = "ID сервисного пользователя"
+}
+
+variable "selectel_user_password" {
+  type        = string
+  description = "Пароль сервисного пользователя"
+  sensitive   = true
+}
+
+variable "selectel_project_name" {
+  type        = string
+  description = "Название проекта"
+}
+
+variable "selectel_project_id" {
+  type        = string
+  description = "ID проекта"
 }
 
 # Openstack provider vars

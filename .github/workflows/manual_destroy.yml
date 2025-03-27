@@ -8,10 +8,12 @@ jobs:
     name: 'Manual Destroy'
     runs-on: self-hosted
     env:
-      terraform_link: ${{ secrets.TERRAFORM_BINARY }}
-      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_ID }}
-      TF_VAR_selectel_user_admin_user: ${{ secrets.SERVICE_USER }}
-      TF_VAR_selectel_user_admin_password: ${{ secrets.SERVICE_PASSWORD }}
+      TF_VAR_selectel_domain_name: ${{ secrets.SELECTEL_DOMAIN_NAME }}
+      TF_VAR_selectel_user_name: ${{ secrets.SELECTEL_USER_NAME }}
+      TF_VAR_selectel_user_id: ${{ secrets.SELECTEL_USER_ID }}
+      TF_VAR_selectel_user_password: ${{ secrets.SELECTEL_USER_PASSWORD }}
+      TF_VAR_selectel_project_name: ${{ secrets.SELECTEL_PROJECT_NAME }}
+      TF_VAR_selectel_project_id: ${{ secrets.SELECTEL_PROJECT_ID }}
       TF_VAR_flavor_name: ${{ secrets.FLAVOR_NAME }}
 
     steps:
@@ -23,14 +25,13 @@ jobs:
       with:
         node-version: 20
 
-    - name: Setup Terraform
+    - name: Setup tfswitch
+      uses: stv-io/action-tfswitch@v1.0.2
+
+    - name: Install Terraform latest
       shell: bash
       run: |
-        curl -o terraform.zip $terraform_link
-        unzip terraform.zip
-        rm terraform.zip
-        chmod 755 terraform
-        mv terraform /usr/local/bin
+        tfswitch -s 1.0 --mirror https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform
 
     - name: Add .terraformrc
       shell: bash
@@ -47,11 +48,7 @@ jobs:
       run: >
         terraform init -reconfigure
         -backend-config="bucket=github-terraform-state"
-        -backend-config="endpoint=s3.ru-1.storage.selcloud.ru"
         -backend-config="key=github-infra-examples.tfstate"
-        -backend-config="region=ru-1"
-        -backend-config="skip_region_validation=true"
-        -backend-config="skip_credentials_validation=true"
         -backend-config="access_key=${{ secrets.S3_ACCESS_KEY }}"
         -backend-config="secret_key=${{ secrets.S3_SECRET_KEY }}"
 
