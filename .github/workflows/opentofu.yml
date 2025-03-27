@@ -54,22 +54,8 @@ jobs:
     - name: OpenTofu destroy
       run: tofu destroy -auto-approve
 
-    - name: Send test Telegram alert
-      if: ${{ (success()) }}
-      uses: cbrgm/telegram-github-action@v1
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        thread-id: 168
-        message: |
-          ⚙️ GitHub repository selectel/selectel-infra-examples
-          
-          🔥 OpenTofu pipeline has succeeded!
-          ➡️ Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
     - name: Send Telegram alert if failed on the main branch
-      if: ${{ (failure()) }}
-      # if: ${{ (failure()) && (github.ref == 'refs/heads/main') }}
+      if: ${{ (failure()) && (github.ref == 'refs/heads/main') }}
       uses: cbrgm/telegram-github-action@v1
       with:
         to: ${{ secrets.TELEGRAM_TO }}
