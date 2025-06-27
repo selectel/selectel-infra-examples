@@ -71,3 +71,4 @@ jobs:
 
           🔥 Terraform pipeline has failed!
           ➡️ Workflow: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        disable-web-page-preview: true
