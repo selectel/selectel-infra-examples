@@ -26,6 +26,8 @@ jobs:
 
     - name: Setup OpenTofu
       uses: opentofu/setup-opentofu@v2
+      with:
+        tofu_wrapper: false
 
     - name: Add .tofurc
       shell: bash
