@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 8 * * 2' # run every Tuesday at 11:00 MSK
   workflow_dispatch:
-        
+
 jobs:
   setup:
     name: 'Modules Test Run - Terraform Latest'
@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Checkout the repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Setup tfswitch
       uses: stv-io/action-tfswitch@v1.0.2
@@ -29,7 +29,7 @@ jobs:
     - name: Install Terraform latest
       shell: bash
       run: |
-        tfswitch -s 1.0 --mirror https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform
+        tfswitch -s 1.0 -m https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform -M https://mirror.selectel.ru/3rd-party/hashicorp-releases/terraform
 
     - name: Add .terraformrc
       shell: bash
